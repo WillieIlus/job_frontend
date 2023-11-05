@@ -1,20 +1,22 @@
-<template>
-    <Form @submit="onSubmit" :validation-schema="schema">
-      <label for="email">Your Email</label>
-      <Field id="email_addr" name="email_addr" type="email" />
-      <ErrorMessage name="email_addr" />
-      <button type="submit">Submit</button>
-    </Form>
-</template>
 <script setup>
-import { Field, Form, ErrorMessage } from 'vee-validate';
-import * as Yup from 'yup';
-
-const schema = Yup.object().shape({
-  email_addr: Yup.string().email().required(),
-});
+import { ref } from 'vue'
+import { Form } from 'vee-validate'
+import * as Yup from 'yup'
 
 const onSubmit = (values) => {
-  alert(JSON.stringify(values));
-};
+  alert(JSON.stringify(values))
+}
+
+const message = ref('')
+
+const schema = Yup.object({
+  message: Yup.string().required().min(3)
+})
 </script>
+
+<template>
+  <Form @submit="onSubmit" :validation-schema="schema">
+    <FormsInput v-model="message" label="Message" name="message" id="message" /> {{ message }}
+    <button type="submit">Submit</button>
+  </Form>
+</template>
