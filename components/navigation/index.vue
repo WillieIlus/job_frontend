@@ -146,7 +146,7 @@ const navItems = [
 
 const userItems = [
   { name: 'Profile', Link: { to: '/accounts/profile' }, current: route.name.includes('profile') },
-  { name: 'Settings', Link: { to: '/accounts' }, current: route.name.includes('settings') },
+  { name: 'Settings', Link: { to: '/accounts/dashboard' }, current: route.name.includes('settings') },
 ]
 
 const loginItems = [
