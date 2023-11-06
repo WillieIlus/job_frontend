@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="-mr-2 flex md:hidden ">
-          <button
+          <button @click="popup = !popup"
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
             aria-label="Main menu" aria-expanded="false">
             <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -73,8 +73,8 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 sm:px-3">
+    <div class="md:hidden" id="mobile-menu" >
+      <div class="px-2 pt-2 pb-3 sm:px-3" v-if="popup" :class="hidden">
         <NuxtLink v-for="item in navItems" :key="item.name" :to="item.Link.to"
           class="block px-3 py-2 rounded-md text-base font-medium"
           :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
@@ -92,14 +92,14 @@
           </div>
           <button
             class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:shadow-solid">
-            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24" @click="popup = !popup">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M15 19c0 1.66-1.34 3-3 3s-3-1.34-3-3"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10V6a5 5 0 0 1 10 0v4"></path>
             </svg>
           </button>
         </div>
-        <div class="mt-3 px-2 sm:px-3">
+        <div class="mt-3 px-2 sm:px-3" v-if="popup" :class="hidden">
           <div v-if="isLoggedIn">
           <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
             class="block px-3 py-2 rounded-md text-base font-medium"
