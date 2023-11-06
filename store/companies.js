@@ -80,23 +80,9 @@ export const useCompanyStore = defineStore('company', {
       });
     },
 
-    // async createCompany(company) {
-    //   await this.handleError(async () => {
 
-    //     const response = await fetch(`${BASE_URL}/companies/`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${useAccountStore.token}`,
-    //       },
-    //       body: JSON.stringify(company),
-    //     });
-    //     const data = await response.json();
-    //     this.companies.push(data);
-    //   });
-    // },
 
-    async createCompany(company) {
+    async createCompany(name, description, logo, cover, website, phone, email, address, is_active, category, location ) {
       try {
         const accountStore = useAccountStore();
         const token = accountStore.token;
@@ -107,7 +93,7 @@ export const useCompanyStore = defineStore('company', {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
           },
-          body: JSON.stringify(company),
+          body: JSON.stringify(name, description, logo, cover, website, phone, email, address, is_active, category, location),
         });
         const data = await response.json();
         this.companies.push(data);
