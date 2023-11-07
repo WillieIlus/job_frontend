@@ -11,8 +11,7 @@
       <FormsInput v-model="phone" label="Phone" name="phone" id="phone" />
       <FormsInput v-model="email" label="Email" name="email" id="email" />
       <FormsInput v-model="address" label="Address" name="address" id="address" />
-      <!-- <FormsInput v-model="is_active" label="Is Active" name="is_active" id="is_active" /> -->
-      <FormsInput v-model="category" label="Category" name="category" id="category" />
+      <FormsSelect v-model="category" label="Category" name="category" id="category" :options="categories" item-value='id' item-text='name' />
       <FormsInput v-model="location" label="Location" name="location" id="location" />
       <FormsCheckbox v-model="is_active" label="Is Active" name="is_active" id="is_active" />
       <ButtonsBlue :disabled="submitting" :class="{ 'opacity-50': submitting }">
@@ -41,6 +40,11 @@ const locationStore = useLocationStore()
 const accountStore = useAccountStore()
 const router = useRouter()
 
+const { loading, error } = storeToRefs(accountStore)
+const categories = storeToRefs(categoryStore)
+const locations = storeToRefs(locationStore)
+const accounts = storeToRefs(accountStore)
+
 const submitting = ref(false)
 
 const name = ref('')
@@ -58,15 +62,15 @@ const location = ref('')
 const schema = Yup.object({
   name: Yup.string().required(),
   description: Yup.string().required(),
-  logo: Yup.string().required(),
-  cover: Yup.string().required(),
-  website: Yup.string().required(),
+  logo: Yup.string(),
+  cover: Yup.string(),
+  website: Yup.string(),
   phone: Yup.string().required(),
   email: Yup.string().required(),
   address: Yup.string().required(),
-  is_active: Yup.boolean().required(),
-  category: Yup.number().required(),
-  location: Yup.number().required(),
+  is_active: Yup.boolean(),
+  // category: Yup.number().required(),
+  // location: Yup.number(),
 })
 
 const onSubmit = async (values) => {
@@ -93,4 +97,11 @@ const onSubmit = async (values) => {
     router.push('/companies')
   }
 }
+
+onMounted(async () => {
+  await categoryStore.fetchCategories()
+  await locationStore.fetchLocations()
+  await accountStore.fetchAccounts()
+})
+
 </script>

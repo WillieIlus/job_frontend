@@ -8,11 +8,20 @@
             <img class="h-8 w-8" src="~/assets/images/logo.svg" alt="Logo">
           </div>
           <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
+            <div class="ml-10 flex items-baseline space-x-4" v-auto-animate>
               <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium" v-for="item in navItems"
                 :key="item.name" :to="item.Link.to"
-                :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
+                :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }"
+                >
                 {{ item.name }}</NuxtLink>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/companies/form">
+                New Job</NuxtLink>
+              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/companies/form">
+                New Company</NuxtLink>
             </div>
           </div>
         </div>
@@ -36,12 +45,13 @@
                   <img class="h-8 w-8 rounded-full" src="~/assets/images/user.jpg" alt="">
                 </button>
               </div>
-              <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" v-if="popup" :class="hidden">
+              <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" v-if="popup" :class="hidden"
+                >
                 <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                   aria-labelledby="user-menu">
                   <div v-if="isLoggedIn">
                     <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" >
                       {{ item.name }}
                     </NuxtLink>
                     <div @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
@@ -49,7 +59,7 @@
                     </div>
                   </div>
                   <NuxtLink v-else v-for="item in loginItems" :key="item.name" :to="item.Link.to"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" >
                     {{ item.name }}
                   </NuxtLink>
                 </div>
@@ -73,8 +83,8 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu" >
-      <div class="px-2 pt-2 pb-3 sm:px-3" v-if="popup" :class="hidden">
+    <div class="md:hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 sm:px-3" v-if="popup" :class="hidden" >
         <NuxtLink v-for="item in navItems" :key="item.name" :to="item.Link.to"
           class="block px-3 py-2 rounded-md text-base font-medium"
           :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
@@ -101,14 +111,15 @@
         </div>
         <div class="mt-3 px-2 sm:px-3" v-if="popup" :class="hidden">
           <div v-if="isLoggedIn">
-          <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
-            class="block px-3 py-2 rounded-md text-base font-medium"
-            :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
-            {{ item.name }}
-          </NuxtLink>
-          <div @click="logout" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
-            Logout
-          </div>
+            <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
+              class="block px-3 py-2 rounded-md text-base font-medium"
+              :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
+              {{ item.name }}
+            </NuxtLink>
+            <div @click="logout"
+              class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
+              Logout
+            </div>
           </div>
           <NuxtLink v-else v-for="item in loginItems" :key="item.name" :to="item.Link.to"
             class="block px-3 py-2 rounded-md text-base font-medium"
