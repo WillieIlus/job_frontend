@@ -11,13 +11,37 @@
       <FormsInput v-model="phone" label="Phone" name="phone" id="phone" />
       <FormsInput v-model="email" label="Email" name="email" id="email" />
       <FormsInput v-model="address" label="Address" name="address" id="address" />
-      <FormsSelect v-model="category" label="Category" name="category" id="category" :options="categories" item-value='id' item-text='name' />
-      <FormsInput v-model="location" label="Location" name="location" id="location" />
-      <FormsCheckbox v-model="is_active" label="Is Active" name="is_active" id="is_active" />
-      <ButtonsBlue :disabled="submitting" :class="{ 'opacity-50': submitting }">
-        <span v-if="submitting">Submitting...</span>
-        <span v-else>Submit</span>
-      </ButtonsBlue>
+      <div v-if="categories" class="mb-4 flex items-center"> <label for="category"
+          class="block text-gray-700 text-sm font-bold mb-2 mr-2 w-32">Category</label>
+        <div class="relative w-full"> <select v-model="category" id="category"
+            class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"> <svg
+              class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
+            </svg> </div>
+        </div>
+        <ErrorMessage :name="name" class="text-red-500" />
+      </div>
+      <div v-if="locations" class="mb-4 flex items-center"> <label for="location"
+          class="block text-gray-700 text-sm font-bold mb-2 mr-2 w-32">Location</label>
+        <div class="relative w-full"> <select v-model="location" id="location"
+            class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"> <svg
+              class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
+            </svg> </div>
+        </div>
+        <ErrorMessage :name="name" class="text-red-500" />
+      </div>
+      <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting"
+        :class="{ 'opacity- 50': submitting }" @click="router.push('/companies')"> <span v-if=" submitting ">Cancel</span>
+        <span v-else>Cancel</span> </ButtonsRed>
+      <ButtonsGreen :disabled=" submitting " :class=" { 'opacity - 50': submitting } " type="submit"> <span
+          v-if=" submitting ">Creating Company…</span> <span v-else>Create Company</span> </ButtonsGreen>
     </Form>
   </CardsBase>
 </template>
@@ -93,7 +117,7 @@ const onSubmit = async (values) => {
     console.log(error)
   } finally {
     submitting.value = false
-    alert('Company created successfully !')
+    // alert('Company created successfully !')
     router.push('/companies')
   }
 }

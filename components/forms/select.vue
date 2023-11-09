@@ -1,7 +1,7 @@
 <template>
   <label :for="name">{{ label }}</label>
   <Field as="select" :name="name" :id="id" class="form-control" v-model="value">
-    <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
+    <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
   </Field>
   <ErrorMessage :name="name" class="text-red-500" />
 </template>
