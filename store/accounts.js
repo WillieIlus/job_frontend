@@ -17,12 +17,12 @@ export const useAccountStore = defineStore('account', {
 
   actions: {
 
-    async signup(email, first_name, phone, password) {
+    async signup(first_name, phone, email, password) {
       try {
         const response = await fetch(`${BASE_URL}/accounts/users/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({email, first_name, phone, password }),
+          body: JSON.stringify({first_name, phone, email, password }),
         });
         if (!response.ok) {
           const errorData = await response.json();

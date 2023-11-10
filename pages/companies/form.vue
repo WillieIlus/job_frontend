@@ -12,12 +12,12 @@
       <FormsInput v-model="email" label="Email" name="email" id="email" />
       <FormsInput v-model="address" label="Address" name="address" id="address" />
       <div v-if="categories" class="mb-4 flex items-center"> <label for="category"
-          class="block text-gray-700 text-sm font-bold mb-2 mr-2 w-32">Category</label>
+          class="">Category</label>
         <div class="relative w-full"> <select v-model="category" id="category"
-            class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            class="">
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
           </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"> <svg
+          <div class=""> <svg
               class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
             </svg> </div>
@@ -25,12 +25,12 @@
         <ErrorMessage :name="name" class="text-red-500" />
       </div>
       <div v-if="locations" class="mb-4 flex items-center"> <label for="location"
-          class="block text-gray-700 text-sm font-bold mb-2 mr-2 w-32">Location</label>
+          class="">Location</label>
         <div class="relative w-full"> <select v-model="location" id="location"
-            class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            class="">
             <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
           </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"> <svg
+          <div class=""> <svg
               class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
             </svg> </div>
@@ -111,14 +111,14 @@ const onSubmit = async (values) => {
       values.address,
       values.is_active,
       values.category,
-      values.location
+      values.location,
     )
   } catch (error) {
     console.log(error)
   } finally {
     submitting.value = false
     // alert('Company created successfully !')
-    router.push('/companies')
+    // router.push('/companies')
   }
 }
 

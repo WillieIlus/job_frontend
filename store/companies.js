@@ -68,7 +68,7 @@ export const useCompanyStore = defineStore('company', {
         this.loading = false;
       }
     },
-    
+
 
     async fetchCompany(slug) {
       this.loading = true
@@ -80,12 +80,18 @@ export const useCompanyStore = defineStore('company', {
       });
     },
 
-
-
-    async createCompany(name, description, logo, cover, website, phone, email, address, is_active, category, location ) {
+    async createCompany(name, description, phone, email, address) {
       try {
         const accountStore = useAccountStore();
         const token = accountStore.token;
+
+        const requestData = {
+          name: name,
+          description: description,
+          phone: phone,
+          email: email,
+          address: address,
+        };
 
         const response = await fetch(`${BASE_URL}/companies/`, {
           method: 'POST',
@@ -93,8 +99,14 @@ export const useCompanyStore = defineStore('company', {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
           },
-          body: JSON.stringify(name, description, logo, cover, website, phone, email, address, is_active, category, location),
+          body: JSON.stringify(requestData),
         });
+
+        if (response.status === 400) {
+          const errorData = await response.json();
+          throw new Error(`Bad Request Error: ${JSON.stringify(errorData)}`);
+        }
+
         const data = await response.json();
         this.companies.push(data);
       } catch (error) {

@@ -18,7 +18,7 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/companies/form">
+              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/jobs/form">
                 New Job</NuxtLink>
               <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/companies/form">
                 New Company</NuxtLink>
@@ -171,7 +171,6 @@ onMounted(async () => {
   } catch (error) {
     console.error('Failed to fetch user data:', error);
   } finally {
-    isLoading.value = false;
   }
 });
 

@@ -66,7 +66,8 @@ export const useJobStore = defineStore('job', {
       });
     },
 
-    async addJob(title, company, job_type) {
+
+    async createJob(title, description, requirements, amount, salary, openings, work_hours, work_experience, education_level, duration_days, deadline, category, location) {
       this.loading = true;
       const accountStore = useAccountStore();
       try {
@@ -76,7 +77,7 @@ export const useJobStore = defineStore('job', {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${accountStore.token}`,
           },
-          body: JSON.stringify({ title, company, job_type }),
+          body: JSON.stringify({ title, description, requirements, amount, salary, openings, work_hours, work_experience, education_level, duration_days, deadline, category, location }),
         });
         if (!response.ok) {
           const errorData = await response.json();
