@@ -80,7 +80,7 @@ export const useCompanyStore = defineStore('company', {
       });
     },
 
-    async createCompany(name, description, phone, email, address) {
+    async createCompany(name, description, phone, website, email, address, category, location, logo, cover) {
       try {
         const accountStore = useAccountStore();
         const token = accountStore.token;
@@ -89,8 +89,13 @@ export const useCompanyStore = defineStore('company', {
           name: name,
           description: description,
           phone: phone,
+          website: website,
           email: email,
           address: address,
+          category: category,
+          location: location,
+          logo: logo,
+          cover: cover,
         };
 
         const response = await fetch(`${BASE_URL}/companies/`, {

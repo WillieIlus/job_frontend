@@ -1,131 +1,185 @@
-
 <template>
-  <CardsBase class="items-center justify-center flex flex-col">
-    <h2 class="text-2xl font-bold mb-4">Create Company</h2>
-    <Form @submit="onSubmit" :validation-schema="schema">
-      <FormsInput v-model="name" label="Name" name="name" id="name" />
-      <FormsTextarea v-model="description" label="Description" name="description" id="description" />
-      <FormsInput v-model="logo" label="Logo" name="logo" id="logo" />
-      <FormsInput v-model="cover" label="Cover" name="cover" id="cover" />
-      <FormsInput v-model="website" label="Website" name="website" id="website" />
-      <FormsInput v-model="phone" label="Phone" name="phone" id="phone" />
-      <FormsInput v-model="email" label="Email" name="email" id="email" />
-      <FormsInput v-model="address" label="Address" name="address" id="address" />
-      <div v-if="categories" class="mb-4 flex items-center"> <label for="category"
-          class="">Category</label>
-        <div class="relative w-full"> <select v-model="category" id="category"
-            class="">
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-          </select>
-          <div class=""> <svg
-              class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg> </div>
+  <div v-if="loading" class="flex justify-center items-center">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+  </div>
+  <div v-else-if="error" class="flex justify-center">
+    <div class="text-red-500">Error: {{ error }}</div>
+  </div>
+  <div v-else>
+    <div class="bg-white rounded-lg p-6 shadow-md">
+      <h1 class="text-2xl font-semibold mb-4">Company Form</h1>
+      <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
+        <FormsInput v-model="name" label="Name" name="name" id="name" />
+        <FormsTextarea v-model="description" label="Description" name="description" id="description" />
+        <div class="flex flex-wrap justify-between -mx-2">
+          <FormsInput v-model="phone" label="Phone" name="phone" id="phone" class="w-full sm:w-1/2 px-2" />
+          <FormsInput v-model="website" label="Website" name="website" id="website" class="w-full sm:w-1/2 px-2" />
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <div v-if="locations" class="mb-4 flex items-center"> <label for="location"
-          class="">Location</label>
-        <div class="relative w-full"> <select v-model="location" id="location"
-            class="">
-            <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
-          </select>
-          <div class=""> <svg
-              class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg> </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <FormsInput v-model="email" label="Email" name="email" id="email" class="w-full sm:w-1/2 px-2" />
+          <FormsInput v-model="address" label="Address" name="address" id="address" class="w-full sm:w-1/2 px-2" />
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting"
-        :class="{ 'opacity- 50': submitting }" @click="router.push('/companies')"> <span v-if=" submitting ">Cancel</span>
-        <span v-else>Cancel</span> </ButtonsRed>
-      <ButtonsGreen :disabled=" submitting " :class=" { 'opacity - 50': submitting } " type="submit"> <span
-          v-if=" submitting ">Creating Company…</span> <span v-else>Create Company</span> </ButtonsGreen>
-    </Form>
-  </CardsBase>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="category">Category</label>
+            <Field as="select" v-model="category"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="category" name="category">
+              <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+            </Field>
+            <ErrorMessage name="category" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="location">Location</label>
+            <Field as="select" v-model="location"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="location" name="location">
+              <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
+            </Field>
+            <ErrorMessage name="location" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="logo">Logo</label>
+            <input @change="onLogoChange" type="file" id="logo" name="logo"
+              class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="cover">Cover</label>
+            <input @change="onCoverChange" type="file" id="cover" name="cover"
+              class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
+            <span v-if="submitting">Cancel</span>
+            <span v-else>Cancel</span>
+          </ButtonsRed>
+          <ButtonsGreen :disabled="submitting" type="submit">
+            <span v-if="submitting">Creating Company…</span>
+            <span v-else>Create Company</span>
+          </ButtonsGreen>
+        </div>
+      </Form>
+    </div>
+  </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { Form } from 'vee-validate'
-import * as Yup from 'yup'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+import { storeToRefs } from 'pinia'
 
 import { useCompanyStore } from '~/store/companies'
 import { useCategoryStore } from '~/store/categories'
 import { useLocationStore } from '~/store/locations'
 import { useAccountStore } from '~/store/accounts'
-import { useRouter } from 'vue-router'
 
-const companyStore = useCompanyStore()
+const router = useRouter()
+
+const companiesStore = useCompanyStore()
 const categoryStore = useCategoryStore()
 const locationStore = useLocationStore()
 const accountStore = useAccountStore()
-const router = useRouter()
 
-const { loading, error } = storeToRefs(accountStore)
-const categories = storeToRefs(categoryStore)
-const locations = storeToRefs(locationStore)
-const accounts = storeToRefs(accountStore)
+const { companies, loading, error } = storeToRefs(companiesStore)
+const { categories } = storeToRefs(categoryStore)
+const { locations } = storeToRefs(locationStore)
+const { user } = storeToRefs(accountStore)
 
-const submitting = ref(false)
+const fetchCompanies = async () => {
+  await companiesStore.fetchCompanies()
+}
+
+const fetchCategories = async () => {
+  await categoryStore.fetchCategories()
+}
+
+const fetchLocations = async () => {
+  await locationStore.fetchLocations()
+}
+
+const getUser = async () => {
+  await accountStore.getUser()
+}
+
+const onLogoChange = (event) => {
+  logo.value = event.target.files[0]
+}
+
+const onCoverChange = (event) => {
+  cover.value = event.target.files[0]
+}
 
 const name = ref('')
 const description = ref('')
-const logo = ref('')
-const cover = ref('')
-const website = ref('')
 const phone = ref('')
+const website = ref('')
 const email = ref('')
 const address = ref('')
-const is_active = ref(false)
 const category = ref('')
 const location = ref('')
+const logo = ref('')
+const cover = ref('')
+const submitting = ref(false)
 
-const schema = Yup.object({
-  name: Yup.string().required(),
-  description: Yup.string().required(),
-  logo: Yup.string(),
-  cover: Yup.string(),
-  website: Yup.string(),
-  phone: Yup.string().required(),
-  email: Yup.string().required(),
-  address: Yup.string().required(),
-  is_active: Yup.boolean(),
-  // category: Yup.number().required(),
-  // location: Yup.number(),
+const schema = yup.object({
+  name: yup.string().required(),
+  description: yup.string().required(),
+  phone: yup.string().required(),
+  website: yup.string().url(),  // Use .url() for URL validation
+  email: yup.string().required(),
+  address: yup.string().required(),
+  category: yup.string().required(),
+  location: yup.string().required(),
+  logo: yup.mixed().test('isImage', 'Invalid file format', (value) => {
+    if (!value) return true; // If no file is provided, it's considered valid
+    return value && value.type.startsWith('image/');
+  }),
+  cover: yup.mixed().test('isImage', 'Invalid file format', (value) => {
+    if (!value) return true; // If no file is provided, it's considered valid
+    return value && value.type.startsWith('image/');
+  }),
 })
+
+
+
 
 const onSubmit = async (values) => {
   submitting.value = true
   try {
-    await companyStore.createCompany(
+    await companiesStore.createCompany(
       values.name,
       values.description,
-      values.logo,
-      values.cover,
-      values.website,
       values.phone,
+      values.website,
       values.email,
       values.address,
-      values.is_active,
       values.category,
       values.location,
+      values.logo,
+      values.cover,
     )
+    router.push('/companies')
   } catch (error) {
     console.log(error)
   } finally {
     submitting.value = false
-    // alert('Company created successfully !')
-    // router.push('/companies')
+
   }
 }
 
-onMounted(async () => {
-  await categoryStore.fetchCategories()
-  await locationStore.fetchLocations()
-  await accountStore.fetchAccounts()
+onMounted(() => {
+  if (user === null) {
+    router.push('/accounts/login')
+  }
+  fetchCompanies()
+  fetchCategories()
+  fetchLocations()
+  getUser()
 })
 
 </script>

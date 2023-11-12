@@ -1,131 +1,91 @@
 <template>
-  <!-- Navigation menu -->
-  <nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="~/assets/images/logo.svg" alt="Logo">
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4" v-auto-animate>
-              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium" v-for="item in navItems"
-                :key="item.name" :to="item.Link.to" v-auto-animate
-                :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current } "
-                >
-                {{ item.name }}</NuxtLink>
-            </div>
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/jobs/form">
-                New Job</NuxtLink>
-              <NuxtLink class="text-white px-3 py-2 rounded-md text-sm font-medium bg-blue-600" to="/companies/form">
-                New Company</NuxtLink>
-            </div>
-          </div>
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <button
-              class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700"
-              aria-label="Notifications">
-              <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 19c0 1.66-1.34 3-3 3s-3-1.34-3-3"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10V6a5 5 0 0 1 10 0v4"></path>
-              </svg>
-            </button>
-
-            <div class="ml-3 relative">
-              <div>
-                <button @click="popup = !popup"
-                  class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid"
-                  id="user-menu" aria-label="User menu" aria-haspopup="true">
-                  <img class="h-8 w-8 rounded-full" src="~/assets/images/user.jpg" alt="">
-                </button>
-              </div>
-              <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" v-if="popup" :class="hidden"
-                >
-                <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
-                  aria-labelledby="user-menu">
-                  <div v-if="isLoggedIn">
-                    <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" >
-                      {{ item.name }}
-                    </NuxtLink>
-                    <div @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                      Logout
-                    </div>
-                  </div>
-                  <NuxtLink v-else v-for="item in loginItems" :key="item.name" :to="item.Link.to"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" >
-                    {{ item.name }}
-                  </NuxtLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="-mr-2 flex md:hidden ">
-          <button @click="popup = !popup"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
-            aria-label="Main menu" aria-expanded="false">
-            <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <svg class="hidden h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 sm:px-3" v-if="popup" :class="hidden" >
-        <NuxtLink v-for="item in navItems" :key="item.name" :to="item.Link.to"
-          class="block px-3 py-2 rounded-md text-base font-medium"
-          :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
-          {{ item.name }}
+  <nav class="bg-slate-900 text-white">
+    <div class="container mx-auto flex items-center justify-between py-4">
+      <div class="flex items-center">
+        <NuxtLink to="/" class="text-xl font-bold">
+          Alphajiri
         </NuxtLink>
       </div>
-      <div class="pt-4 pb-3 border-t border-gray-700">
-        <div class="flex items-center px-5">
-          <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="~/assets/images/user.jpg" alt="">
-          </div>
-          <div class="ml-3" v-if="isLoggedIn">
-            <div class="text-base font-medium leading-none text-white">{{ user.first_name }}</div>
-            <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
-          </div>
-          <button
-            class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:shadow-solid">
-            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24" @click="popup = !popup">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 19c0 1.66-1.34 3-3 3s-3-1.34-3-3"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10V6a5 5 0 0 1 10 0v4"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="mt-3 px-2 sm:px-3" v-if="popup" :class="hidden">
-          <div v-if="isLoggedIn">
-            <NuxtLink v-for="item in userItems" :key="item.name" :to="item.Link.to"
-              class="block px-3 py-2 rounded-md text-base font-medium"
-              :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
-              {{ item.name }}
-            </NuxtLink>
-            <div @click="logout"
-              class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
-              Logout
-            </div>
-          </div>
-          <NuxtLink v-else v-for="item in loginItems" :key="item.name" :to="item.Link.to"
-            class="block px-3 py-2 rounded-md text-base font-medium"
-            :class="{ 'bg-gray-900 text-white': item.current, 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.current }">
+      <div class="hidden md:flex items-center space-x-4">
+        <div v-for="(item, index) in navItems" :key="index">
+          <NuxtLink :to="item.Link.to" :class="[
+            'py-2 px-3 rounded-md hover:bg-slate-700',
+            item.current ? 'bg-indigo-700' : ''
+          ]">
             {{ item.name }}
           </NuxtLink>
+        </div>
+        <div v-if="isLoggedIn" class="flex items-center space-x-4">
+          <NuxtLink to="/companies/form" class="py-2 px-3 rounded-md bg-indigo-900 hover:bg-indigo-700">
+            New Company
+          </NuxtLink>
+          <NuxtLink to="/jobs/form" class="py-2 px-3 rounded-md bg-slate-700 hover:bg-indigo-700">
+            New Job
+          </NuxtLink>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button class="md:hidden" @click="toggleMobileMenu">
+          <Bars3Icon class="h-6 w-6" />
+        </button>
+        <div v-if="isLoggedIn" class="relative">
+          <button class="flex items-center space-x-2" @click="toggleUserMenu">
+            <img class="h-8 w-8 rounded-full" :src="user.avatar" :alt="user.name" />
+            <ChevronDownIcon class="h-4 w-4" />
+          </button>
+          <div v-if="userMenuOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-10">
+            <NuxtLink to="/accounts/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Profile
+            </NuxtLink>
+            <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              @click="accountStore.logout">
+              Logout
+            </button>
+          </div>
+        </div>
+        <div v-else class="flex justify-center">
+          <div v-for="(item, index) in loginItems" :key="index">
+            <NuxtLink :to="item.Link.to" :class="[ 'bg-indigo-900 py-2 px-3 m-1 rounded-md hover-bg-indigo-700',
+              item.current ? 'bg-slate-700' : ''
+            ]">
+              {{ item.name }}
+            </NuxtLink>
+          </div>
+        </div>
+
+        <div v-if="mobileMenuOpen" class="absolute top-0 left-0 w-full h-full bg-slate-900 z-10">
+          <div class="flex flex-col items-center justify-center h-full">
+            <button class="absolute top-0 right-0 m-4" @click="toggleMobileMenu">
+              <XMarkIcon class="h-6 w-6" />
+            </button>
+            <div v-for="(item, index) in navItems" :key="index">
+              <NuxtLink :to="item.Link.to" :class="[
+                'py-2 px-3 rounded-md hover:bg-slate-700',
+                item.current ? 'bg-slate-700' : ''
+              ]">
+                {{ item.name }}
+              </NuxtLink>
+            </div>
+            <div v-if="isLoggedIn" class="flex items-center space-x-4">
+              <NuxtLink to="/companies/form" class="py-2 px-3 rounded-md bg-indigo-900 hover:bg-indigo-700">
+                New Company
+              </NuxtLink>
+              <NuxtLink to="/jobs/form" class="py-2 px-3 rounded-md bg-slate-700 hover:bg-indigo-700">
+                New Job
+              </NuxtLink>
+            </div>
+            <div v-if="!isLoggedIn" class="flex flex-col items-center justify-center space-y-4">
+              <div v-for="(item, index) in loginItems" :key="index">
+                <NuxtLink :to="item.Link.to" :class="[
+                  'py-2 px-3 rounded-md hover:bg-slate-700',
+                  item.current ? 'bg-slate-700' : ''
+                ]">
+                  {{ item.name }}
+                </NuxtLink>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -133,9 +93,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia';
+import { Bars3Icon, BellIcon, XMarkIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useAccountStore } from '~/store/accounts';
 
 const accountStore = useAccountStore()
@@ -143,9 +104,23 @@ const { user, isLoggedIn } = storeToRefs(accountStore)
 const route = useRoute()
 
 const popup = ref(false)
+const mobileMenuOpen = ref(false)
+const userMenuOpen = ref(false)
+const isDarkMode = ref(false)
 
-const newJobButton = { name: 'New Job', Link: { to: '/new-job' } };
-const logout = () => { accountStore.logout() }
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value
+  const html = document.querySelector('html')
+  if (isDarkMode.value) {
+    html.classList.add('dark')
+  } else {
+    html.classList.remove('dark')
+  }
+}
+
+const togglePopup = () => { popup.value = !popup.value }
+const toggleMobileMenu = () => { mobileMenuOpen.value = !mobileMenuOpen.value }
+const toggleUserMenu = () => { userMenuOpen.value = !userMenuOpen.value }
 
 const navItems = [
   { name: 'Home', Link: { to: '/' }, current: route.name === 'index' },
@@ -153,11 +128,6 @@ const navItems = [
   { name: 'Companies', Link: { to: '/companies' }, current: route.name.includes('companies') },
   { name: 'Categories', Link: { to: '/categories' }, current: route.name.includes('categories') },
   { name: 'Locations', Link: { to: '/locations' }, current: route.name.includes('locations') },
-]
-
-const userItems = [
-  { name: 'Profile', Link: { to: '/accounts/profile' }, current: route.name.includes('profile') },
-  { name: 'Settings', Link: { to: '/accounts/dashboard' }, current: route.name.includes('settings') },
 ]
 
 const loginItems = [
@@ -175,3 +145,20 @@ onMounted(async () => {
 });
 
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+nav a:hover {
+  background-color: #4B5563;
+}
+</style>
+

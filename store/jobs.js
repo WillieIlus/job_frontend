@@ -67,30 +67,63 @@ export const useJobStore = defineStore('job', {
     },
 
 
-    async createJob(title, description, requirements, amount, salary, openings, work_hours, work_experience, education_level, duration_days, deadline, category, location) {
-      this.loading = true;
-      const accountStore = useAccountStore();
+    async createJob(
+      title,
+      email, description, requirements,
+      // image, 
+      company, website, phone, category, location, job_type, salary_type, currency, salary,
+      // openings, 
+      // work_experience, 
+      education_level,
+      // work_hours, 
+      // vacancies, 
+      // deadline
+    ) {
       try {
+        const accountStore = useAccountStore();
+        const token = accountStore.token;
+
+        const requestData = {
+          title: title,
+          email: email,
+          description: description,
+          requirements: requirements,
+          // image: image,
+          company: company,
+          website: website,
+          phone: phone,
+          category: category,
+          location: location,
+          job_type: job_type,
+          salary_type: salary_type,
+          currency: currency,
+          salary: salary,
+          // openings: openings,
+          // work_experience: work_experience,
+          education_level: education_level,
+          // work_hours: work_hours,
+          // vacancies: vacancies,
+          // deadline: deadline,
+        };
+
         const response = await fetch(`${BASE_URL}/jobs/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accountStore.token}`,
+            'Authorization': 'Bearer ' + token,
           },
-          body: JSON.stringify({ title, description, requirements, amount, salary, openings, work_hours, work_experience, education_level, duration_days, deadline, category, location }),
+          body: JSON.stringify(requestData),
         });
-        if (!response.ok) {
+
+        if (response.status === 400) {
           const errorData = await response.json();
-          console.error('Bad Request Error:', errorData);
-          const error = new Error(errorData.detail);
-          throw error;
+          throw new Error(`Bad Request Error: ${JSON.stringify(errorData)}`);
         }
+
         const data = await response.json();
         this.jobs.push(data);
       } catch (error) {
         console.error(error);
-      } finally {
-        this.loading = false;
       }
     },
 

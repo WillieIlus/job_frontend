@@ -7,6 +7,8 @@ export const useAccountStore = defineStore('account', {
     token: null,
     user: null,
     refresh: null,
+    loading: false, 
+    error: null,
 
   }),
 

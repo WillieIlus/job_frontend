@@ -1,119 +1,269 @@
 <template>
-  <CardsBase class="items-center">
-    <template #header>
-      <h1 class="text-2xl font-semibold">Create Job</h1>
-    </template>
-
-    <Form @submit="onSubmit" :validation-schema="schema">
-      <FormsInput v-model="title" label="Title" name="title" id="title" />
-      <FormsTextarea v-model="description" label="Description" name="description" id="description" />
-      <FormsTextarea v-model="requirements" label="Requirements" name="requirements" id="requirements" />
-      <FormsInput v-model="amount" label="Amount" name="amount" id="amount" />
-      <FormsInput v-model="salary" label="Salary" name="salary" id="salary" />
-      <FormsInput v-model="openings" label="Openings" name="openings" id="openings" />
-      <FormsInput v-model="work_hours" label="Work Hours" name="work_hours" id="work_hours" />
-      <FormsInput v-model="work_experience" label="Work Experience" name="work_experience" id="work_experience" />
-      <FormsInput v-model="education_level" label="Education Level" name="education_level" id="education_level" />
-      <FormsInput v-model="duration_days" label="Duration Days" name="duration_days" id="duration_days" />
-      <FormsInput v-model="deadline" label="Deadline" name="deadline" id="deadline" />
-      <div v-if="company" class="mb-4 flex items-center">
-        <label for="company" class="">Company</label>
-        <div class="relative w-full">
-          <select v-model="company" id="company" class="">
-            <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}</option>
-          </select>
-          <div class="">
-            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg>
+  <div v-if="loading" class="flex justify-center items-center h-screen">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+  </div>
+  <div v-else-if="error" class="flex justify-center">
+    <div class="text-red-500">Error: {{ error }}</div>
+  </div>
+  <div v-else>
+    <div class="bg-white rounded-lg p-6 shadow-md">
+      <h1 class="text-2xl font-semibold mb-4">Job Form</h1>
+      <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <FormsInput v-model="title" label="Title" name="title" id="title" class="w-full sm:w-1/2 px-2" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <FormsInput v-model="email" label="Email" name="email" id="email" class="w-full sm:w-1/2 px-2" />
           </div>
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <div v-if="categories" class="mb-4 flex items-center">
-        <label for="category" class="">Category</label>
-        <div class="relative w-full">
-          <select v-model="category" id="category" class="">
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-          </select>
-          <div class="">
-            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg>
+        <FormsTextarea v-model="description" label="Description" name="description" id="description" />
+        <FormsTextarea v-model="requirements" label="Requirements" name="requirements" id="requirements" />
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <!-- < -->
+            <label class="text-gray-700 dark:text-gray-300" for="image">Image</label>
+            <input @change="onImageChange" type="file" id="image" name="image"
+              class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="category">Company</label>
+            <Field as="select" v-model="company"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="company" name="company">
+              <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}</option>
+            </Field>
+            <ErrorMessage name="company" class="text-red-500" />
           </div>
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <div v-if="locations" class="mb-4 flex items-center">
-        <label for="location" class="">Location</label>
-        <div class="relative w-full">
-          <select v-model="location" id="location" class="">
-            <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
-          </select>
-          <div class="">
-            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <FormsInput v-model="website" label="Website" name="website" id="website" class="w-full sm:w-1/2 px-2" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <FormsInput v-model="phone" label="Phone" name="phone" id="phone" class="w-full sm:w-1/2 px-2" />
           </div>
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <div v-if="jobTypes" class="mb-4 flex items-center">
-        <label for="job_type" class="">Job Type</label>
-        <div class="relative w-full">
-          <select v-model="job_type" id="job_type" class="">
-            <option v-for="job_type in jobTypes" :key="job_type.value" :value="job_type.value">{{ job_type.label }}
-            </option>
-          </select>
-          <div class="">
-            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M6 8l4 4 4-4 2 2-6 6-6-6 2-2z" />
-            </svg>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="category">Category</label>
+            <Field as="select" v-model="category"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="category" name="category">
+              <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+            </Field>
+            <ErrorMessage name="category" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="location">Location</label>
+            <Field as="select" v-model="location"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="location" name="location">
+              <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
+            </Field>
+            <ErrorMessage name="location" class="text-red-500" />
           </div>
         </div>
-        <ErrorMessage :name="name" class="text-red-500" />
-      </div>
-      <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting"
-        :class="{ 'opacity- 50': submitting }" @click="router.push('/companies')"> <span v-if="submitting">Cancel</span>
-        <span v-else>Cancel</span>
-      </ButtonsRed>
-      <ButtonsGreen :disabled="submitting" :class="{ 'opacity - 50': submitting }" type="submit"> <span
-          v-if="submitting">Creating Company…</span> <span v-else>Create Company</span> </ButtonsGreen>
-
-    </Form>
-  </CardsBase>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="job_type">Job Type</label>
+            <Field as="select" v-model="job_type"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="job_type" name="job_type">
+              <option v-for="job_type in jobTypes" :key="job_type.value" :value="job_type.value">{{ job_type.label }}
+              </option>
+            </Field>
+            <ErrorMessage name="job_type" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="salary_type">Salary Type</label>
+            <Field as="select" v-model="salary_type"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="salary_type" name="salary_type">
+              <option v-for="salary_type in salaryTypes" :key="salary_type.value" :value="salary_type.value">{{
+                salary_type.label }}</option>
+            </Field>
+            <ErrorMessage name="salary_type" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="currency">Currency</label>
+            <Field as="select" v-model="currency"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="currency" name="currency">
+              <option v-for="currency in currencyTypes" :key="currency.value" :value="currency.value">{{ currency.label }}
+              </option>
+            </Field>
+            <ErrorMessage name="currency" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="salary">Salary</label>
+            <Field v-model="salary" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="salary" name="salary" />
+            <ErrorMessage name="salary" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="openings">Openings</label>
+            <Field v-model="openings" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="openings" name="openings" />
+            <ErrorMessage name="openings" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="work_experience">Work Experience</label>
+            <Field v-model="work_experience" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="work_experience" name="work_experience" />
+            <ErrorMessage name="work_experience" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="education_level">Education Level</label>
+            <Field v-model="education_level" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="education_level" name="education_level" />
+            <ErrorMessage name="education_level" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="work_hours">Work Hours</label>
+            <Field v-model="work_hours" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="work_hours" name="work_hours" />
+            <ErrorMessage name="work_hours" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-between -mx-2">
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="vacancies">Vacancies</label>
+            <Field v-model="vacancies" type="number"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="vacancies" name="vacancies" />
+            <ErrorMessage name="vacancies" class="text-red-500" />
+          </div>
+          <div class="w-full sm:w-1/2 px-2">
+            <label class="text-gray-700 dark:text-gray-300" for="deadline">Deadline</label>
+            <Field v-model="deadline" type="date"
+              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+              id="deadline" name="deadline" />
+            <ErrorMessage name="deadline" class="text-red-500" />
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
+            <span v-if="submitting">Cancel</span>
+            <span v-else>Cancel</span>
+          </ButtonsRed>
+          <ButtonsGreen :disabled="submitting" type="submit">
+            <span v-if="submitting">Creating Job…</span>
+            <span v-else>Create Job</span>
+          </ButtonsGreen>
+        </div>
+      </Form>
+    </div>
+  </div>
 </template>
+  
 <script setup>
-import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
+import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { Form } from 'vee-validate'
-import * as Yup from 'yup'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+import { storeToRefs } from 'pinia'
 
 import { useJobStore } from '~/store/jobs'
 import { useCompanyStore } from '~/store/companies'
 import { useCategoryStore } from '~/store/categories'
 import { useLocationStore } from '~/store/locations'
 import { useAccountStore } from '~/store/accounts'
-import { useRouter } from 'vue-router'
 
-const jobStore = useJobStore()
-const companyStore = useCompanyStore();
+const router = useRouter()
+
+const jobsStore = useJobStore()
+const companiesStore = useCompanyStore()
 const categoryStore = useCategoryStore()
 const locationStore = useLocationStore()
 const accountStore = useAccountStore()
-const router = useRouter()
 
-const { loading, error } = storeToRefs(accountStore)
-const categories = storeToRefs(categoryStore)
-const companies = storeToRefs(companyStore)
-const locations = storeToRefs(locationStore)
-const accounts = storeToRefs(accountStore)
+const { jobs, loading, error } = storeToRefs(jobsStore)
+const { companies } = storeToRefs(companiesStore)
+const { categories } = storeToRefs(categoryStore)
+const { locations } = storeToRefs(locationStore)
+const { user } = storeToRefs(accountStore)
 
+const fetchJobs = async () => {
+  await jobsStore.fetchJobs()
+}
 
+const fetchCompanies = async () => {
+  await companiesStore.fetchMyCompanies()
+}
+
+const fetchCategories = async () => {
+  await categoryStore.fetchCategories()
+}
+
+const fetchLocations = async () => {
+  await locationStore.fetchLocations()
+}
+
+const getUser = async () => {
+  await accountStore.getUser()
+}
+
+const onImageChange = (event) => {
+  image.value = event.target.files[0]
+}
+
+const title = ref('')
+const email = ref('')
+const description = ref('')
+const requirements = ref('')
+const image = ref('')
+const company = ref('')
+const website = ref('')
+const phone = ref('')
+const category = ref('')
+const location = ref('')
+const job_type = ref('')
+const salary_type = ref('')
+const currency = ref('')
+const salary = ref('')
+const openings = ref('')
+const work_experience = ref('')
+const education_level = ref('')
+const work_hours = ref('')
+const vacancies = ref('')
+const deadline = ref('')
 const submitting = ref(false)
-const successMessage = ref('')
-const errorMessage = ref('')
+
+const schema = yup.object({
+  title: yup.string().required(),
+  email: yup.string().email().required(),
+  description: yup.string().required(),
+  requirements: yup.string(),
+  image: yup.mixed(),
+  company: yup.number().required(),
+  website: yup.string().url(),
+  phone: yup.string().required(),
+  category: yup.number(),
+  location: yup.number(),
+  job_type: yup.string(),
+  salary_type: yup.string(),
+  currency: yup.string(),
+  salary: yup.number(),
+  openings: yup.number(),
+  work_experience: yup.number(),
+  education_level: yup.number(),
+  work_hours: yup.number(),
+  vacancies: yup.number(),
+  deadline: yup.date(),
+})
 
 const jobTypes = computed(() => {
   return [
@@ -126,74 +276,75 @@ const jobTypes = computed(() => {
   ];
 });
 
-const schema = Yup.object({
-  title: Yup.string().required(),
-  description: Yup.string().required(),
-  requirements: Yup.string().required(),
-  amount: Yup.number().required(),
-  salary: Yup.number().required(),
-  openings: Yup.number().required(),
-  work_hours: Yup.number().required(),
-  work_experience: Yup.number().required(),
-  education_level: Yup.number().required(),
-  duration_days: Yup.number().required(),
-  deadline: Yup.date().required(),
-  category: Yup.number().required(),
-  location: Yup.number().required(),
-})
+const currencyTypes = computed(() => {
+  return [
+    { value: 'USD', label: 'US Dollar' },
+    { value: 'EUR', label: 'Euro' },
+    { value: 'GBP', label: 'British Pound' },
+    { value: 'CAD', label: 'Canadian Dollar' },
+    { value: 'AUD', label: 'Australian Dollar' },
+    { value: 'NZD', label: 'New Zealand Dollar' },
+    { value: 'CHF', label: 'Swiss Franc' },
+    { value: 'JPY', label: 'Japanese Yen' },
+    { value: 'CNY', label: 'Chinese Yuan' },
+  ];
+});
 
-const title = ref('')
-const description = ref('')
-const requirements = ref('')
-const amount = ref('')
-const salary = ref('')
-const openings = ref('')
-const work_hours = ref('')
-const work_experience = ref('')
-const education_level = ref('')
-const duration_days = ref('')
-const deadline = ref('')
-const category = ref('')
-const location = ref('')
+const salaryTypes = computed(() => {
+  return [
+    { value: 'PH', label: 'Per Hour' },
+    { value: 'PD', label: 'Per Day' },
+    { value: 'PW', label: 'Per Week' },
+    { value: 'PM', label: 'Per Month' },
+    { value: 'PY', label: 'Per Year' },
+  ];
+});
 
 const onSubmit = async (values) => {
   submitting.value = true
   try {
-    await jobStore.createJob(
-      values.title,
-      values.description,
-      values.requirements,
-      values.amount,
-      values.salary,
-      values.openings,
-      values.work_hours,
-      values.work_experience,
-      values.education_level,
-      values.duration_days,
-      values.deadline,
-      values.category,
-      values.location,
+    await jobsStore.createJob(
+      title.value,
+      email.value,
+      description.value,
+      requirements.value,
+      // image.value,
+      company.value,
+      website.value,
+      phone.value,
+      category.value,
+      location.value,
+      job_type.value,
+      salary_type.value,
+      currency.value,
+      salary.value,
+      // openings.value,
+      // work_experience.value,
+      education_level.value,
+      // work_hours.value,
+      // vacancies.value,
+      // deadline.value,
     )
-    router.push({ name: 'jobs' })
+    // router.push('/jobs')
   } catch (error) {
     console.log(error)
-  } finally {
     submitting.value = false
+    alert('Error creating job')
   }
 }
 
-onMounted(async () => {
-  if (accountStore.account) {
-    await companyStore.fetchCompanies(accountStore.account.id)
-  }
-  if (jobStore.user === null) {
+
+
+onMounted(() => {
+  if (!user.value) {
     router.push('/accounts/login')
   }
-  await categoryStore.fetchCategories()
-  await locationStore.fetchLocations()
-  await accountStore.fetchAccounts()
-  await companyStore.fetchMyCompanies()
-  await jobStore.fetchJobs()
+
+  fetchJobs()
+  fetchCompanies()
+  fetchCategories()
+  fetchLocations()
+  getUser()
 })
 
 </script>
