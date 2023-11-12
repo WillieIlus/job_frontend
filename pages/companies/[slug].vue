@@ -1,86 +1,125 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <div class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-900">{{ company.name }}</h1>
+  <div v-if="loading" class="flex justify-center items-center">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+  </div>
+  <div v-else-if="company">
+    <div class="bg-gray-100 min-h-screen">
+      <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold text-gray-900">{{ company.name }}</h1>
+        </div>
       </div>
-    </div>
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Company Name
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                {{ company.name }}
-              </dd>
+      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2" v-if="!loading && !error">
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Company Name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">{{ company.name }}</dd>
+              </div>
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Industry
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">{{ company.get_category }}</dd>
+              </div>
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Address
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">{{ company.get_location }} - {{ company.address }}</dd>
+              </div>
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Phone Number
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">{{ company.phone }}</dd>
+              </div>
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Email
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">{{ company.email }}</dd>
+              </div>
+              <div class="sm:col-span-1">
+                <dt class="text-lg font-medium text-slate-700">
+                  Website
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">
+                  <NuxtLink :to="company.website" >{{ company.website }}</NuxtLink>
+                </dd>
+              </div>
+              <div class="sm:col-span-2">
+                <dt class="text-lg font-medium text-slate-700">
+                  Description
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">
+                  {{ company.description }}
+                </dd>
+              </div>
+            </dl>
+            <div v-else-if="loading" class="text-center mt-4">
+              Loading...
             </div>
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Industry
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                {{ company.industry }}
-              </dd>
+            <div v-else class="text-center mt-4 text-red-600">
+              An error occurred while fetching company details.
             </div>
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Address
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                {{ company.address }}
-              </dd>
-            </div>
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Phone Number
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                {{ company.phone }}
-              </dd>
-            </div>
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Email
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                {{ company.email }}
-              </dd>
-            </div>
-            <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500">
-                Website
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                <a :href="company.website" target="_blank">{{ company.website }}</a>
-              </dd>
-            </div>
-          </dl>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" v-if="!loading && !error">
+          <div class="px-4 py-5 sm:p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Jobs at {{ company.name }}</h2>
+            <ul>
+              <li v-for="job in companyJobs" :key="job.id">
+                <div class="text-lg font-semibold text-indigo-700">{{ job.title }}</div>
+                <div class="text-gray-600">{{ job.description }}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div v-else class="text-center mt-4 text-red-600">
+          Unable to fetch company's jobs due to an error.
         </div>
       </div>
     </div>
   </div>
+  <div v-else class="flex justify-center">
+    <div class="text-red-500">Error: {{ error }}</div>
+  </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      company: {
-        name: 'Acme Inc.',
-        industry: 'Technology',
-        address: '123 Main St, Anytown USA',
-        phone: '555-555-5555',
-        email: 'info@acme.com',
-        website: 'https://www.acme.com'
-      }
-    }
-  }
-}
-</script>
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useCompanyStore } from '~/store/companies'
+import { useJobStore } from '~/store/jobs'
 
-<style>
-/* Add your custom styles here */
-</style>
+const companyStore = useCompanyStore()
+const jobStore = useJobStore()
+
+const { company, loading, error } = storeToRefs(companyStore)
+const { jobs } = storeToRefs(jobStore)
+
+const fetchCompany = async () => {
+  const { params } = useRoute()
+  await companyStore.fetchCompany(params.slug)
+}
+
+const fetchJobs = async () => {
+  await jobStore.fetchJobs()
+}
+
+onMounted(() => {
+  fetchCompany()
+  fetchJobs()
+})
+
+const companyJobs = computed(() => {
+  return jobs.value.filter(job => job.company === company.id)
+})
+</script>

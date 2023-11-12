@@ -325,7 +325,7 @@ const onSubmit = async (values) => {
       // vacancies.value,
       // deadline.value,
     )
-    // router.push('/jobs')
+    router.push('/jobs')
   } catch (error) {
     console.log(error)
     submitting.value = false

@@ -1,31 +1,40 @@
 <template>
-    <div class="flex flex-wrap justify-center">
-      <div v-for="company in companies" :key="company.id" class="m-4">
-        <nuxt-link :to="`/companies/${company.slug}`">
-          <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <img class="w-full" :src="company.logo" :alt="company.name" />
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">{{ company.name }}</div>
-              <p class="text-gray-700 text-base">{{ company.description }}</p>
-              <div class="flex justify-between mt-4">
-                <div class="text-gray-700 text-base">{{ company.user }}</div>
-                <div class="text-gray-700 text-base">{{ company.get_location }}</div>
-              </div>
+  <div class="bg-white dark:bg-gray-800 text-black dark:text-white p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-for="company in companies" :key="company.id">
+        <div class="bg-gray-100 dark:bg-gray-700 rounded p-4 shadow-md">
+          <h2 class="text-xl font-semibold mb-2">{{ company.name }}</h2>
+          <p class="text-gray-600 dark:text-gray-400">{{ company.description }}</p>
+          <div class="mt-2">
+            <span class="inline-block bg-blue-500 text-white rounded-full px-2 py-1 text-sm font-semibold">{{ company.get_category }}</span>
+            <span class="ml-2 inline-block bg-green-500 text-white rounded-full px-2 py-1 text-sm font-semibold">{{ company.get_location }}</span>
+          </div>
+          <div class="mt-4">
+            <NuxtLink :to="'/companies/' + company.slug" class="bg-indigo-700 text-white py-2 px-4 rounded-md text-sm font-semibold">
+              Details
+            </NuxtLink>
+          </div>
+          <div class="mt-4">
+            <div class="flex justify-between">
+              <span class="text-sm font-semibold">Phone:</span>
+              <span class="text-sm">{{ company.phone }}</span>
             </div>
-            <div class="px-6 pt-4 pb-2">
-              <span
-                v-for="category in categories"
-                :key="category.id"
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-              >
-                {{ category.name }}
-              </span>
+            <div class="flex justify-between">
+              <span class="text-sm font-semibold">Email:</span>
+              <span class="text-sm">{{ company.email }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-sm font-semibold">Address:</span>
+              <span class="text-sm">{{ company.address }}</span>
             </div>
           </div>
-        </nuxt-link>
+        </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
+
 <script setup>
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
