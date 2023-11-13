@@ -1,6 +1,5 @@
 <template>
   <CardsBreadcrumbs :items="breadcrumbs" />
-  
   <div v-if="loading">
     <p>Loading...</p>
   </div>
@@ -87,17 +86,6 @@
               {{ job.requirements }}
             </p>
             <!-- Add more qualification details as needed -->
-          </template>
-        </CardsDescription>
-        <CardsDescription>
-          <template #title>Required Skills</template>
-          <template #content>
-            <div class="flex space-x-4">
-              <ButtonsGreen />
-              <ButtonsBlue />
-              <ButtonsRed />
-              <ButtonsOrange />
-            </div>
           </template>
         </CardsDescription>
       </CardsBase>

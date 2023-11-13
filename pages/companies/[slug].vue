@@ -73,12 +73,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" v-if="!loading && !error">
           <div class="px-4 py-5 sm:p-6">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Jobs at {{ company.name }}</h2>
-            <ul>
-              <li v-for="job in companyJobs" :key="job.id">
-                <div class="text-lg font-semibold text-indigo-700">{{ job.title }}</div>
-                <div class="text-gray-600">{{ job.description }}</div>
-              </li>
-            </ul>
+            <JobList :jobs="jobs" />
           </div>
         </div>
         <div v-else class="text-center mt-4 text-red-600">
