@@ -8,5 +8,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vee-validate/nuxt',
     '@formkit/auto-animate/nuxt',
+    // '@nuxt/postcss8',
   ],
 })
