@@ -23,15 +23,17 @@
 </template> -->
 
 <template>
-  <div class="col-span-12 xl:col-span-9">
-    <div v-if="loading" class="text-center">Loading...</div>
-    <div v-else-if="jobs.length === 0" class="text-center">no jobs found</div>
-    <div v-else>
-
-
-    <JobList :jobs="jobs" />
+  <div class="container mx-auto">
+    <div class="grid grid-cols-12 xl:gap-10 gap-y-12">
+      <div class="col-span-12 xl:col-span-9">
+        <div v-if="loading" class="text-center">Loading...</div>
+        <div v-else-if="jobs.length === 0" class="text-center">no jobs found</div>
+        <div v-else>
+          <JobList :jobs="jobs" />
+        </div>
+      </div>
     </div>
-       
+
 
   </div>
 
@@ -228,7 +230,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 
