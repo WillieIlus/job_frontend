@@ -87,9 +87,9 @@
         <!--end col-->
         <div class="col-span-12 lg:col-span-3">
           <div class="mb-2 lg:flex">
-            <div class="flex-shrink-0">
-              <i
-                class="mr-1 mdi mdi-map-marker group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500"></i>
+            <div class="flex items-center">
+              <MapPinIcon
+                class=" h-4 w-4 mr-1 mdi mdi-map-marker group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500"/>
             </div>
             <p class="mb-0 text-gray-500 dark:text-gray-300">{{ job.address }}, {{ job.get_location }}</p>
           </div>
@@ -97,7 +97,7 @@
         <!--end col-->
         <div class="col-span-12 lg:col-span-2">
           <div>
-            <p class="mb-0 text-gray-500 dark:text-gray-300">
+            <p class="mb-0 text-gray-500 dark:text-gray-300 flex items-center">
               <ClockIcon
                 class="h-4 w-4 mr-1 uil uil-clock-three group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500" />
               {{ job.timesince }} ago
@@ -107,8 +107,7 @@
         <!--end col-->
         <div class="col-span-12 lg:col-span-2">
           <div class="flex flex-wrap gap-1.5">
-            <span class="bg-green-500/20 text-green-500 text-13 px-2 py-0.5 font-medium rounded">{{ job.get_job_type
-            }}</span>
+            <span class="bg-green-500/20 text-green-500 text-13 px-2 py-0.5 font-medium rounded">{{ job.get_job_type }}</span>
           </div>
         </div>
         <!--end col-->
@@ -124,10 +123,10 @@
           </div>
         </div>
         <!--end col-->
-        <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0 flex items-center">
-          <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
+        <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0 ">
+          <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50 flex items-center">
             <NuxtLink to="#applyNow" data-bs-toggle="modal">Apply Now </NuxtLink>
-            <ChevronDoubleRightIcon class="h-5 w-5 mr-1" />
+            <ChevronDoubleRightIcon class="h-4 w-4 ml-1" />
           </div>
         </div>
 

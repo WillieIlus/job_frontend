@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 text-black dark:text-white p-4">
+  <!-- <div class="bg-white dark:bg-gray-800 text-black dark:text-white p-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div v-for="company in companies" :key="company.id">
         <div class="bg-gray-100 dark:bg-gray-700 rounded p-4 shadow-md">
@@ -30,6 +30,24 @@
           </div>
         </div>
       </div>
+    </div>
+  </div> -->
+  <div class="main-content">
+    <div class="page-content">
+      <section class="py-20">
+        <div class="container mx-auto">
+          <div class="grid items-center grid-cols-12 mb-4">
+
+            <div class="col-span-12 lg:col-span-8">
+              <div class="mb-3 mb-lg-0">
+                <h6 class="text-gray-900 text-16 dark:text-gray-50"> Showing 1 – 8 of 11 results </h6>
+              </div>
+              <CompanyList :companies="companies" />
+
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
