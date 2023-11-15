@@ -1,11 +1,11 @@
 <template>
   <!-- Start grid -->
-  <section v-for="company in companies" :key="company.slug" class="py-20">
+  <section class="py-20">
     <div class="container mx-auto">
       <div class="mt-8">
         <div class="grid grid-cols-12 gap-8">
 
-          <div class="col-span-12 lg:col-span-4">
+          <div  v-for="company in companies" :key="company.slug" class="col-span-12 lg:col-span-4">
             <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
               <img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto">
               <div class="mt-5 text-center">
