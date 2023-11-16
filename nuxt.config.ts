@@ -19,9 +19,7 @@ export default defineNuxtConfig({
     '~/assets/css/icons/boxicons.css',
     '~/assets/css/icons/line-awesome.css',
     '~/assets/css/icons/fontawesome.css',
-    '~/assets/css/icons/dripings.css',
-    '~/assets/css/icons/eva-icons .css',
-
+    '~/assets/css/icons/dripicons.css',
 
     '~/assets/css/plugins/custom-scrollbar.css',
     '~/assets/css/plugins/search-form.css',

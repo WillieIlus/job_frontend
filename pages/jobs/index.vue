@@ -1,27 +1,3 @@
-<!-- <template>
-  <div class="flex flex-col pt-6 pl-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">Job Listings</h1>
-    <div v-if="loading" class="text-center">Loading...</div>
-    <div v-else-if="jobs.length === 0" class="text-center">no jobs found</div>
-    <div v-else>
-      <div class="mb-4">
-        <p class="text-gray-700 text-center">Showing {{ jobStart }}-{{ jobEnd }} of {{ jobCount }} jobs.</p>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col md:flex-row"> -->
-    <!-- Job filter options -->
-    <!-- <div class="w-full md:w-1/4 bg-gray-100 p-6">
-      <FilterCategories :categories="categories" />
-      <FilterLocations :locations="locations" />
-    </div> -->
-    <!-- Job listings -->
-    <!-- <div class="w-full md:w-3/4 p-6">
-      <JobList :jobs="jobs" />
-    </div>
-  </div>
-</template> -->
-
 <template>
   <div class="container mx-auto">
     <div class="grid grid-cols-12 xl:gap-10 gap-y-12">
@@ -32,10 +8,8 @@
           <JobList :jobs="jobs" />
         </div>
       </div>
-    </div>
+    
 
-
-  </div>
 
   <div class="col-span-12 space-y-5 lg:col-span-3">
     <div data-tw-accordion="collapse">
@@ -230,6 +204,8 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 </template>
 
 
