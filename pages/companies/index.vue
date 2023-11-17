@@ -1,37 +1,4 @@
 <template>
-  <!-- <div class="bg-white dark:bg-gray-800 text-black dark:text-white p-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div v-for="company in companies" :key="company.id">
-        <div class="bg-gray-100 dark:bg-gray-700 rounded p-4 shadow-md">
-          <h2 class="text-xl font-semibold mb-2">{{ company.name }}</h2>
-          <p class="text-gray-600 dark:text-gray-400">{{ company.description }}</p>
-          <div class="mt-2">
-            <span class="inline-block bg-blue-500 text-white rounded-full px-2 py-1 text-sm font-semibold">{{ company.get_category }}</span>
-            <span class="ml-2 inline-block bg-green-500 text-white rounded-full px-2 py-1 text-sm font-semibold">{{ company.get_location }}</span>
-          </div>
-          <div class="mt-4">
-            <NuxtLink :to="'/companies/' + company.slug" class="bg-indigo-700 text-white py-2 px-4 rounded-md text-sm font-semibold">
-              Details
-            </NuxtLink>
-          </div>
-          <div class="mt-4">
-            <div class="flex justify-between">
-              <span class="text-sm font-semibold">Phone:</span>
-              <span class="text-sm">{{ company.phone }}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-sm font-semibold">Email:</span>
-              <span class="text-sm">{{ company.email }}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-sm font-semibold">Address:</span>
-              <span class="text-sm">{{ company.address }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <div class="main-content">
     <div class="page-content">
 
@@ -61,11 +28,242 @@
         <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
       </section>
 
-      <CompanyList :companies="companies" />
+      <!-- Start grid -->
+      <section class="py-20">
+        <div class="container mx-auto">
+          <div class="grid items-center grid-cols-12 mb-4">
+            <div class="col-span-12 lg:col-span-8">
+              <div class="mb-3 mb-lg-0">
+                <h6 class="text-gray-900 text-16 dark:text-gray-50"> Showing 1 – 8 of 11 results </h6>
+              </div>
+            </div><!--end col-->
 
-    </div>
+            <div class="col-span-12 lg:col-span-4">
+              <div class="candidate-list-widgets">
+                <div class="grid items-center grid-cols-12 gap-3">
+                  <div class="col-span-12 lg:col-span-6">
+                    <div class="selection-widget">
+                      <select class="form-select" data-trigger name="choices-single-filter-orderby"
+                        id="choices-single-filter-orderby" aria-label="Default select example">
+                        <option value="df">Default</option>
+                        <option value="ne">Newest</option>
+                        <option value="od">Oldest</option>
+                        <option value="rd">Random</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-span-12 lg:col-span-6">
+                    <div class="selection-widget">
+                      <select class="form-select" data-trigger name="choices-candidate-page" id="choices-candidate-page"
+                        aria-label="Default select example">
+                        <option value="df">All</option>
+                        <option value="ne">8 per Page</option>
+                        <option value="ne">12 per Page</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div><!--end candidate-list-widgets-->
+            </div><!--end col-->
+          </div>
+          <div class="mt-8">
+            <div class="grid grid-cols-12 gap-8">
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Jobcy Consulting</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">New York</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">52
+                      Opening Jobs</a>
+                  </div>
+                  <div class="absolute px-2 text-white bg-violet-500 top-3 ltr:right-0 rtl:left-0">
+                    <span class="relative text-xs font-medium uppercase">4.9 <i class="mdi mdi-star-outline"></i></span>
+                    <div
+                      class="after:contant[] ltr:after:border-r-[11px] rtl:after:border-l-[11px] after:absolute after:border-b-[11px] ltr:after:-left-[11px] rtl:after:-right-[11px] after:top-0 after:border-t-[11px] after:border-t-transparent after:border-violet-500 after:border-b-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-02.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Creative Agency</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">UK</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">11
+                      Opening Jobs</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-03.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">DootTech Solution</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">London</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">09
+                      Opening Jobs</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-07.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Apple School & College</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">Canada</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">27
+                      Opening Jobs </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-05.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Hunter Hospital</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">America</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">07
+                      Opening Jobs</a>
+                  </div>
+                  <div class="absolute px-2 text-white bg-violet-500 top-3 ltr:right-0 rtl:left-0">
+                    <span class="relative text-xs font-medium uppercase">4.8 <i class="mdi mdi-star-outline"></i></span>
+                    <div
+                      class="after:contant[] ltr:after:border-r-[11px] rtl:after:border-l-[11px] after:absolute after:border-b-[11px] ltr:after:-left-[11px] rtl:after:-right-[11px] after:top-0 after:border-t-[11px] after:border-t-transparent after:border-violet-500 after:border-b-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-06.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Jshop Agency</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">Canada</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">20
+                      Opening Jobs</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-08.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Adobe Agency</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">New York</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">27
+                      Opening Jobs</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-09.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Creative Agency</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">Uk</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">35
+                      Opening Jobs</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-4">
+                <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                  <img src="assets/images/featured-job/img-10.png" alt="" class="mx-auto">
+                  <div class="mt-5 text-center">
+                    <a href="company-details.html">
+                      <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Kshop Agency</h6>
+                    </a>
+                    <p class="mb-6 text-gray-500 dark:text-gray-300">America</p>
+
+                    <a href="company-details.html"
+                      class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">14
+                      Opening Jobs</a>
+                  </div>
+                  <div class="absolute px-2 text-white bg-violet-500 top-3 ltr:right-0 rtl:left-0">
+                    <span class="relative text-xs font-medium uppercase">3.0 <i class="mdi mdi-star-outline"></i></span>
+                    <div
+                      class="after:contant[] ltr:after:border-r-[11px] rtl:after:border-l-[11px] after:absolute after:border-b-[11px] ltr:after:-left-[11px] rtl:after:-right-[11px] after:top-0 after:border-t-[11px] after:border-t-transparent after:border-violet-500 after:border-b-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-12">
+            <div class="col-span-12">
+              <ul class="flex justify-center gap-2 mt-8">
+                <li
+                  class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-gray-100/20">
+                  <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
+                    <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-white"></i>
+                  </a>
+                </li>
+                <li
+                  class="w-12 h-12 text-center text-white border border-transparent rounded-full cursor-pointer group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">
+                  <a class="text-16 leading-[2.8]" href="javascript:void(0)">1</a>
+                </li>
+                <li
+                  class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                  <a class="text-16 leading-[2.8]" href="javascript:void(0)">2</a>
+                </li>
+                <li
+                  class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                  <a class="text-16 leading-[2.8]" href="javascript:void(0)">3</a>
+                </li>
+                <li
+                  class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                <a class="text-16 leading-[2.8]" href="javascript:void(0)">4</a>
+              </li>
+              <li
+                class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                <a href="javascript:void(0)" tabindex="-1">
+                  <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+    </section>
+    <!-- End grid -->
+
   </div>
-</template>
+</div></template>
 
 
 <script setup>

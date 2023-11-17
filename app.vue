@@ -4,6 +4,7 @@
       <Navigation />
       <div class="main-content">
         <div class="page-content">
+          <NavigationSwitcher />
           <section class="py-16">
             <NuxtPage />
           </section>
