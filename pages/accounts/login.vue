@@ -80,6 +80,10 @@ import * as Yup from 'yup'
 import { useAccountStore } from '~/store/accounts';
 import { useRouter } from 'vue-router'
 
+definePageMeta({
+  layout: 'auth'
+})
+
 const accountStore = useAccountStore()
 const router = useRouter()
 
