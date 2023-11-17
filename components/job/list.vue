@@ -13,15 +13,14 @@
         <div class="col-span-10">
           <h5 class="mb-1 fs-17">
             <NuxtLink :to="`/jobs/${job.slug}`" class="dark:text-gray-50">{{ job.title }}</NuxtLink>
-            <small class="font-normal text-gray-500 dark:text-gray-300">(2-4 Yrs Exp.)</small>
+            <small class="font-normal text-gray-500 dark:text-gray-300">( {{ job.experience }} Yrs Exp.)</small>
           </h5>
           <ul class="flex flex-wrap mb-0 lg:gap-3 gap-y-3">
             <li>
               <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">{{ job.get_company }}</p>
             </li>
             <li>
-              <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="mdi mdi-map-marker"></i> {{ job.address
-              }}, {{ job.get_location }}</p>
+              <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="mdi mdi-map-marker"></i> {{ job.address }}, {{ job.get_location }}</p>
             </li>
             <li>
               <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="uil uil-wallet"></i>{{ job.currency }} {{ job.salary }} / {{ job.salary_type }}</p>
@@ -42,9 +41,8 @@
       <div class="grid grid-cols-12">
         <div class="col-span-12 lg:col-span-6">
           <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
-            <li><i class="uil uil-tag"></i> Keywords :</li>
-            <li><a href="javascript:void(0)" class="primary-link text-muted"> Marketing</a>,</li>
-            <li><a href="javascript:void(0)" class="primary-link text-muted">business</a></li>
+            <li><i class="uil uil-tag"></i> Category :</li>
+            <li><NuxtLink to="" class="primary-link text-muted"> {{ job.get_category}}</NuxtLink>,</li>
           </ul>
         </div>
         <!--end col-->
