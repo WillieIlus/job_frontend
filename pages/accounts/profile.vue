@@ -24,8 +24,8 @@
             </div>
           </div>
         </div>
-        <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
-        <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+        <img src="~/assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+        <img src="~/assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
       </section>
 
       <!-- Start grid -->
@@ -36,7 +36,7 @@
               <div class="border rounded border-gray-100/50 dark:border-neutral-600">
                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
                   <div class="text-center">
-                    <img src="assets/images/profile.jpg" alt=""
+                    <img src="~/assets/images/profile.jpg" alt=""
                       class="w-20 h-20 p-1 mx-auto border-2 rounded-full border-gray-200/20">
                     <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">Jansh Dickens</h6>
                     <p class="mb-4 text-gray-500 dark:text-gray-300">Developer</p>
@@ -77,7 +77,7 @@
                             <p class="mb-0 text-gray-500 dark:text-gray-300">1.25 MB</p>
                           </div>
                           <div class="ml-auto text-xl">
-                            <a href="assets/images/dark-logo.png" download="" class="text-gray-500 fs-20"><i
+                            <a href="~/assets/images/dark-logo.png" download="" class="text-gray-500 fs-20"><i
                                 class="uil uil-import"></i></a>
                           </div>
                         </div>
@@ -92,7 +92,7 @@
                             <p class="mb-0 text-gray-500 dark:text-gray-300">1.25 MB</p>
                           </div>
                           <div class="ml-auto text-xl">
-                            <a href="assets/images/dark-logo.png" download="" class="text-gray-500 fs-20"><i
+                            <a href="~/assets/images/dark-logo.png" download="" class="text-gray-500 fs-20"><i
                                 class="uil uil-import"></i></a>
                           </div>
                         </div>
@@ -338,7 +338,7 @@
                           <h5 class="mb-3 text-gray-900 fs-17 fw-semibold dark:text-gray-50">My Account</h5>
                           <div class="text-center">
                             <div class="relative mb-4">
-                              <img src="assets/images/user/img-02.jpg"
+                              <img src="~/assets/images/user/img-02.jpg"
                                 class="w-40 h-40 p-1 mx-auto border-2 rounded-full border-gray-100/50 dark:border-neutral-600"
                                 id="profile-img" alt="">
                               <div

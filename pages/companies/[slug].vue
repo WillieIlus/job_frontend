@@ -24,8 +24,8 @@
             </div>
           </div>
         </div>
-        <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
-        <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+        <img src="~/assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+        <img src="~/assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
       </section>
 
       <!-- Start grid -->
@@ -36,7 +36,7 @@
               <div class="border rounded border-gray-100/50 dark:border-neutral-600">
                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
                   <div class="text-center">
-                    <img src="assets/images/featured-job/img-01.png" alt="" class="w-20 h-20 mx-auto rounded-full">
+                    <img src="~/assets/images/featured-job/img-01.png" alt="" class="w-20 h-20 mx-auto rounded-full">
                     <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">Jobcy Technology Pvt.Ltd</h6>
                     <p class="mb-4 text-gray-500 dark:text-gray-300">Since July 2017</p>
                     <ul class="flex flex-wrap justify-center gap-4">
@@ -170,14 +170,14 @@
                   <div class="grid grid-cols-12 gap-y-5 lg:gap-5">
                     <div class="col-span-6">
                       <div class="relative overflow-hidden rounded-md group/gallery">
-                        <img src="assets/images/blog/img-01.jpg" alt=""
+                        <img src="~/assets/images/blog/img-01.jpg" alt=""
                           class="transition-all duration-300 ease-in-out group-hover/gallery:scale-110">
                         <div
                           class="transition-all duration-300 ease-in-out group-hover/gallery:bg-black/40 group-hover/gallery:absolute group-hover/gallery:inset-0">
                         </div>
                         <div
                           class="absolute top-[50%] left-[50%] -translate-x-5 -translate-y-5 group-hover/gallery:block hidden transition-all duration-300 ease-in-out text-2xl">
-                          <a href="assets/images/blog/img-01.jpg" class="text-white image-popup"
+                          <a href="~/assets/images/blog/img-01.jpg" class="text-white image-popup"
                             data-title="Project Leader"
                             data-description="There are many variations of passages of available, but the majority alteration in some form."><i
                               class="uil uil-search-alt"></i></a>
@@ -186,14 +186,14 @@
                     </div><!-- end col -->
                     <div class="col-span-6">
                       <div class="relative overflow-hidden rounded-md group/gallery">
-                        <img src="assets/images/blog/img-03.jpg" alt=""
+                        <img src="~/assets/images/blog/img-03.jpg" alt=""
                           class="transition-all duration-300 ease-in-out group-hover/gallery:scale-110">
                         <div
                           class="transition-all duration-300 ease-in-out group-hover/gallery:bg-black/40 group-hover/gallery:absolute group-hover/gallery:inset-0">
                         </div>
                         <div
                           class="absolute top-[50%] left-[50%] -translate-x-5 -translate-y-5 group-hover/gallery:block hidden transition-all duration-300 ease-in-out text-2xl">
-                          <a href="assets/images/blog/img-03.jpg" class="text-white image-popup"
+                          <a href="~/assets/images/blog/img-03.jpg" class="text-white image-popup"
                             data-title="Project Leader"
                             data-description="There are many variations of passages of available, but the majority alteration in some form."><i
                               class="uil uil-search-alt"></i></a>
@@ -202,14 +202,14 @@
                     </div><!-- end col -->
                     <div class="col-span-12">
                       <div class="relative overflow-hidden rounded-md group/gallery">
-                        <img src="assets/images/blog/img-12.jpg" alt=""
+                        <img src="~/assets/images/blog/img-12.jpg" alt=""
                           class="transition-all duration-300 ease-in-out group-hover/gallery:scale-110">
                         <div
                           class="transition-all duration-300 ease-in-out group-hover/gallery:bg-black/40 group-hover/gallery:absolute group-hover/gallery:inset-0">
                         </div>
                         <div
                           class="absolute top-[50%] left-[50%] -translate-x-5 -translate-y-5 group-hover/gallery:block hidden transition-all duration-300 ease-in-out text-2xl">
-                          <a href="assets/images/blog/img-12.jpg" class="text-white image-popup"
+                          <a href="~/assets/images/blog/img-12.jpg" class="text-white image-popup"
                             data-title="Project Leader"
                             data-description="There are many variations of passages of available, but the majority alteration in some form."><i
                               class="uil uil-search-alt"></i></a>
@@ -227,7 +227,7 @@
                         <div class="grid grid-cols-12 gap-y-5 lg:gap-5">
                           <div class="col-span-12 lg:col-span-2">
                             <div class="text-center">
-                              <a href="company-details.html"><img src="assets/images/featured-job/img-01.png" alt=""
+                              <a href="company-details.html"><img src="~/assets/images/featured-job/img-01.png" alt=""
                                   class="md:mx-auto img-fluid rounded-3"></a>
                             </div>
                           </div>
@@ -298,7 +298,7 @@
                         <div class="grid grid-cols-12 gap-y-5 lg:gap-5">
                           <div class="col-span-12 lg:col-span-2">
                             <div class="text-center">
-                              <a href="company-details.html"><img src="assets/images/featured-job/img-02.png" alt=""
+                              <a href="company-details.html"><img src="~/assets/images/featured-job/img-02.png" alt=""
                                   class="md:mx-auto img-fluid rounded-3"></a>
                             </div>
                           </div>
@@ -368,7 +368,7 @@
                         <div class="grid grid-cols-12 gap-y-5 lg:gap-5">
                           <div class="col-span-12 lg:col-span-2">
                             <div class="text-center">
-                              <a href="company-details.html"><img src="assets/images/featured-job/img-05.png" alt=""
+                              <a href="company-details.html"><img src="~/assets/images/featured-job/img-05.png" alt=""
                                   class="md:mx-auto img-fluid rounded-3"></a>
                             </div>
                           </div>
@@ -434,7 +434,7 @@
                         <div class="grid grid-cols-12 gap-y-5 lg:gap-5">
                           <div class="col-span-12 lg:col-span-2">
                             <div class="text-center">
-                              <a href="company-details.html"><img src="assets/images/featured-job/img-06.png" alt=""
+                              <a href="company-details.html"><img src="~/assets/images/featured-job/img-06.png" alt=""
                                   class="md:mx-auto img-fluid rounded-3"></a>
                             </div>
                           </div>

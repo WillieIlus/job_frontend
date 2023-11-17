@@ -22,8 +22,8 @@
                             </div>
                         </div>
                     </div>
-                    <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
-                    <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+                    <img src="~/assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+                    <img src="~/assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
                 </section>
                 
                 <!-- Start team -->
@@ -377,7 +377,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-01.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -438,7 +438,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-02.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-02.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -498,7 +498,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-03.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-03.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -558,7 +558,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-04.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-04.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -618,7 +618,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-05.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-05.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -676,7 +676,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-06.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-06.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -737,7 +737,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-07.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-07.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -797,7 +797,7 @@
                                                 <div class="grid grid-cols-12 gap-5">
                                                     <div class="col-span-12 lg:col-span-1">
                                                         <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img src="assets/images/featured-job/img-08.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                            <a href="company-details.html"><img src="~/assets/images/featured-job/img-08.png" alt="" class="mx-auto img-fluid rounded-3"></a>
                                                         </div>
                                                     </div>
                                                     <!--end col-->

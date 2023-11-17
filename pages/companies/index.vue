@@ -24,8 +24,8 @@
             </div>
           </div>
         </div>
-        <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
-        <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+        <img src="~/assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+        <img src="~/assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
       </section>
 
       <!-- Start grid -->
@@ -70,7 +70,7 @@
             <div class="grid grid-cols-12 gap-8">
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-01.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Jobcy Consulting</h6>
@@ -91,7 +91,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-02.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-02.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Creative Agency</h6>
@@ -106,7 +106,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-03.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-03.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">DootTech Solution</h6>
@@ -121,7 +121,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-07.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-07.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Apple School & College</h6>
@@ -136,7 +136,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-05.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-05.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Hunter Hospital</h6>
@@ -157,7 +157,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-06.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-06.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Jshop Agency</h6>
@@ -172,7 +172,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-08.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-08.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Adobe Agency</h6>
@@ -187,7 +187,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-09.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-09.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Creative Agency</h6>
@@ -202,7 +202,7 @@
               </div>
               <div class="col-span-12 lg:col-span-4">
                 <div class="relative px-6 py-12 border rounded-md border-gray-100/50 dark:border-neutral-600">
-                  <img src="assets/images/featured-job/img-10.png" alt="" class="mx-auto">
+                  <img src="~/assets/images/featured-job/img-10.png" alt="" class="mx-auto">
                   <div class="mt-5 text-center">
                     <a href="company-details.html">
                       <h6 class="mb-3 text-lg text-gray-900 dark:text-white">Kshop Agency</h6>
