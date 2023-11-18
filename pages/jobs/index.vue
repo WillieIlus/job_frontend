@@ -300,7 +300,7 @@
               </div>
 
               <div class="space-y-8 mt-14">
-                <JobList :jobs="jobs" />
+                <FilterJobs :jobs="jobs" />
               </div>
 
               <FilterPagination />
@@ -526,12 +526,13 @@ const jobStore = useJobStore()
 const categoryStore = useCategoryStore()
 const locationStore = useLocationStore()
 
-const { jobs, loading } = storeToRefs(jobStore)
+const { jobs, loading, error } = storeToRefs(jobStore)
 const { categories } = storeToRefs(categoryStore)
 const { locations } = storeToRefs(locationStore)
 
 const selectedCategory = ref('')
 const selectedLocation = ref('')
+
 
 const fetchJobs = async () => {
   await jobStore.fetchJobs()
@@ -565,7 +566,3 @@ onMounted(async () => {
   await fetchLocations()
 })
 </script>
-
-<style scoped>
-/* Add Tailwind CSS classes here */
-</style>

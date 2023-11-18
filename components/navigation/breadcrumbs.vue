@@ -9,7 +9,7 @@
             <div class="page-next">
               <nav class="inline-block" aria-label="breadcrumb text-center">
                 <ol class="flex flex-wrap justify-center text-sm font-medium uppercase">
-                  <li><a href="index.html">Home</a></li>
+                  <li><NuxtLink to="/">Home</NuxtLink></li>
                   <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a href="javascript:void(0)">Company</a>
                   </li>
                   <li class="active" aria-current="page"><i class="bx bxs-chevron-right align-middle px-2.5"></i> Job
