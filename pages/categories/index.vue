@@ -1,3 +1,4 @@
+
 <template>
   <div class="main-content">
     <div class="page-content">
@@ -17,17 +18,18 @@
               </div>
             </div>
           </div>
+
           <div class="grid grid-cols-12 gap-y-5 md:gap-8">
-            <div v-for="(location, index) in locations" :key="location.id"
+            <div v-for="(category, index) in categories" :key="category.id"
               :class="`col-span-12 md:col-span-6 xl:col-span-4 ${index % 3 === 0 ? 'col-start-4' : ''}`">
               <div class="mt-10 rounded bg-gray-50 dark:bg-neutral-700">
                 <div class="p-6">
                   <ul class="space-y-4">
                     <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
-                      <NuxtLink :to="`/locations/${location.slug}`" class="text-gray-900 dark:text-white"> {{
-                        location.name }} <span
+                      <NuxtLink :to="`/categories/${category.slug}`" class="text-gray-900 dark:text-white"> {{
+                        category.name }} <span
                           class="px-2 py-1 rounded bg-sky-500/20 text-11 text-sky-500 ltr:float-right rtl:float-left">{{
-                            location.job_count }}</span></NuxtLink>
+                            category.job_count }}</span></NuxtLink>
                     </li>
                   </ul>
                 </div>
@@ -45,7 +47,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useLocationStore } from '@/store/locations';
+import { useCategoryStore } from '@/store/categories';
 import { useRouter } from 'vue-router';
 
 const breadcrumbs = [
@@ -54,16 +56,16 @@ const breadcrumbs = [
     action: () => router.push({ name: 'index' }),
   },
   {
-    label: 'Locations',
+    label: 'Categories',
   },
 ];
 
-const locationStore = useLocationStore();
-const { locations, loading, error } = storeToRefs(locationStore);
+const categoryStore = useCategoryStore();
+const { categories, loading, error } = storeToRefs(categoryStore);
 const router = useRouter();
 
 onMounted(() => {
-  locationStore.fetchLocations();
+  categoryStore.fetchCategories();
 });
 
 </script>

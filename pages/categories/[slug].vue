@@ -1,6 +1,6 @@
 
 <template>
-  <CardsBreadcrumbs :items="breadcrumbs" />
+  <NavigationBreadcrumbs :items="breadcrumbs" />
   <CardsBase>
     <h1>Categories</h1>
     <div v-if="categories">
@@ -22,7 +22,7 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useCategoryStore } from '@/store/categories';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const breadcrumbs = [
   {

@@ -1,57 +1,46 @@
 <template>
-  <div :class="{ 'dark': isDarkMode }" class="bg-gray-100 dark:bg-gray-800 min-h-screen p-4">
-    <CardsBreadcrumbs :items="breadcrumbs" class="mb-4" />
+  <div class="main-content">
+    <div class="page-content">
 
-<!-- Locations List Section -->
-<CardsBase class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
-  <HeadingsH1 :class="{'text-white': isDarkMode, 'text-gray-800': !isDarkMode}" class="text-2xl mb-4">Locations</HeadingsH1>
-  <div v-if="locations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    <div v-for="location in locations" :key="location.id">
-      <CardsList class="p-4 hover:shadow-md transition duration-300 ease-in-out">
-        <NuxtLink :to="`/locations/${location.slug}`" class="text-blue-500 font-semibold text-lg">{{ location.name }}</NuxtLink>
-        <p class="mt-2 text-gray-600 dark:text-gray-300">{{ location.description }}</p>
-      </CardsList>
+      <NavigationBreadcrumbs />
+
+      <!-- Start grid -->
+      <section class="py-20">
+        <div class="container mx-auto">
+          <div class="grid grid-cols-12 gap-y-10 lg:gap-10">
+            <div class="col-span-12 lg:col-span-6 lg:col-start-4">
+              <div class="mb-5 text-center">
+                <p class="inline px-2 py-1 text-sm font-medium text-white bg-yellow-500 rounded">Jobs Live Today</p>
+                <h4 class="mt-2 text-gray-900 text-22 dark:text-white">Browse Job By Location</h4>
+                <p class="mt-2 text-gray-500 dark:text-gray-300">Post a job to tell us about your project. We'll quickly
+                  match you with the right freelancers.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-12 gap-y-5 md:gap-8">
+            <div v-for="(location, index) in locations" :key="location.id"
+              :class="`col-span-12 md:col-span-6 xl:col-span-4 ${index % 3 === 0 ? 'col-start-4' : ''}`">
+              <div class="mt-10 rounded bg-gray-50 dark:bg-neutral-700">
+                <div class="p-6">
+                  <ul class="space-y-4">
+                    <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
+                      <NuxtLink :to="`/locations/${location.slug}`" class="text-gray-900 dark:text-white"> {{
+                        location.name }} <span
+                          class="px-2 py-1 rounded bg-sky-500/20 text-11 text-sky-500 ltr:float-right rtl:float-left">{{
+                            location.job_count }}</span></NuxtLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End grid -->
     </div>
   </div>
-
-  <!-- Display Loading -->
-  <div v-if="loading" class="text-gray-500 mt-6">
-    <p>Loading...</p>
-  </div>
-
-  <!-- Display Error -->
-  <div v-if="error" class="text-red-500 mt-6">
-    <p>{{ error }}</p>
-  </div>
-</CardsBase>
-
-
-    <!-- Location Form Section -->
-    <CardsBase class="mt-8 bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
-      <HeadingsH1 :class="{'text-white': isDarkMode, 'text-gray-800': !isDarkMode}" class="text-2xl mb-4">Add New Location</HeadingsH1>
-      <form @submit.prevent="onHandleSubmit" class="space-y-4">
-        <div class="flex flex-col">
-          <label for="name" class="text-sm font-medium text-gray-600 dark:text-gray-300">Location Name</label>
-          <input v-model="name" @input="() => useValidateField('name')" type="text" id="name" name="name" :class="{ 'border-red-500': errors.name }" class="mt-1 p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
-          <span v-if="errors.name" class="text-red-500 text-sm">{{ errors.name }}</span>
-        </div>
-
-        <div class="flex flex-col">
-          <label for="description" class="text-sm font-medium text-gray-600 dark:text-gray-300">Description</label>
-          <textarea v-model="description" @input="() => useValidateField('description')" id="description" name="description" :class="{ 'border-red-500': errors.description }" rows="4" class="mt-1 p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out"></textarea>
-          <span v-if="errors.description" class="text-red-500 text-sm">{{ errors.description }}</span>
-        </div>
-
-        <button :disabled="submitting" type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-300 ease-in-out">
-          {{ submitting ? 'Submitting...' : 'Submit' }}
-        </button>
-      </form>
-    </CardsBase>
-
-  </div>
 </template>
-
-<!-- The rest of your script setup remains unchanged -->
 
 
 <script setup>
@@ -59,10 +48,7 @@ import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocationStore } from '@/store/locations';
 import { useRouter } from 'vue-router';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
 
-const isDarkMode = ref(false);
 const breadcrumbs = [
   {
     label: 'Home',
@@ -77,41 +63,9 @@ const locationStore = useLocationStore();
 const { locations, loading, error } = storeToRefs(locationStore);
 const router = useRouter();
 
-const schema = yup.object({
-  name: yup.string().min(3).required(),
-  description: yup.string().min(16),
-});
-
-const { handleSubmit, validateField } = useForm({ validationSchema: schema });
-
-const { value: name, errorMessage: nameError } = useField('name');
-const { value: description, errorMessage: descriptionError } = useField('description');
-
-const errors = {
-  name: nameError || '',
-  description: descriptionError || '',
-};
-
-const useValidateField = (field) => {
-  validateField(field);
-};
-
-const submitting = ref(false);
-
-const onHandleSubmit = handleSubmit(async (values) => {
-  submitting.value = true;
-  try {
-    await locationStore.createLocation(values.name, values.description);
-    router.push({ name: '/locations' });
-  } catch (error) {
-    console.error(error);
-  } finally {
-    submitting.value = false;
-  }
-});
-
 onMounted(() => {
   locationStore.fetchLocations();
 });
 
 </script>
+
