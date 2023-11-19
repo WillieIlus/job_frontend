@@ -1,3 +1,4 @@
+
 <template>
   <nav
     class="navbar fixed right-0 left-0 top-0 lg:top-[44.5px] px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 dark:bg-neutral-800 z-40 dark:shadow-neutral-900"
@@ -8,7 +9,7 @@
           <img src="~/assets/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
           <img src="~/assets/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
         </NuxtLink>
-        <button data-collapse-toggle="navbar-collapse" type="button"
+        <button  @click="toggleNavbarCollapse" type="button"
           class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-sticky" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
@@ -64,10 +65,9 @@
           </div>
         </div>
 
-        <div id="navbar-collapse"
-          class="navbar-res items-center justify-between w-full text-sm lg:flex lg:w-auto lg:order-1 group-focus:[.navbar-toggler]:block hidden">
-          <ul class="flex flex-col items-start mt-5 mb-10 font-medium lg:mt-0 lg:mb-0 lg:items-center lg:flex-row"
-            id="navigation-menu">
+        <div v-if="navbarCollapse"  :class="{'block': navbarCollapse, 'hidden': !navbarCollapse}"
+          class="navbar-res items-center justify-between w-full text-sm lg:flex lg:w-auto lg:order-1 group-focus:[.navbar-toggler]:block">
+          <ul class="flex flex-col items-start mt-5 mb-10 font-medium lg:mt-0 lg:mb-0 lg:items-center lg:flex-row">
             <li v-for="(item, index) in navItems" :key="index" class="py-5 lg:px-4">
               <NuxtLink :to="item.Link.to" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50"
                 data-bs-toggle="dropdown">{{ item.name }}</NuxtLink>
@@ -76,8 +76,10 @@
         </div>
       </div>
     </div>
+
   </nav>
 </template>
+
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
@@ -86,28 +88,21 @@ import { storeToRefs } from 'pinia';
 import { Bars3Icon, BellIcon, XMarkIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useAccountStore } from '~/store/accounts';
 
+
 const accountStore = useAccountStore()
 const { user, isLoggedIn } = storeToRefs(accountStore)
 const route = useRoute()
 
 const popup = ref(false)
-const mobileMenuOpen = ref(false)
+const navbarCollapse = ref(false)
 const userMenuOpen = ref(false)
-const isDarkMode = ref(false)
 
-const toggleDarkMode = () => {
-  isDarkMode.value = !isDarkMode.value
-  const html = document.querySelector('html')
-  if (isDarkMode.value) {
-    html.classList.add('dark')
-  } else {
-    html.classList.remove('dark')
-  }
-}
+
 
 const togglePopup = () => { popup.value = !popup.value }
-const toggleMobileMenu = () => { mobileMenuOpen.value = !mobileMenuOpen.value }
 const toggleUserMenu = () => { userMenuOpen.value = !userMenuOpen.value }
+const toggleNavbarCollapse = () => {  navbarCollapse.value = !navbarCollapse.value;}
+
 
 const navItems = [
   { name: 'Home', Link: { to: '/' }, current: route.name === 'index' },
