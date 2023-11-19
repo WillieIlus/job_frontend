@@ -48,37 +48,37 @@
             <ul class="space-y-4">
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="about.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> About Us
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="contact.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Contact Us
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="services.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Services
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="blog.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Blog
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="team.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Team
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="pricing.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Pricing
                 </NuxtLink>
               </li>
@@ -89,25 +89,25 @@
             <ul class="space-y-4">
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="job-categories.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Browser Categories
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="job-list.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Browser Jobs
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="job-details.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Job Details
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="bookmark-jobs.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Bookmark Jobs
                 </NuxtLink>
               </li>
@@ -118,19 +118,19 @@
             <ul class="space-y-4">
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="candidate-list.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Candidate List
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="candidate-grid.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Candidate Grid
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="candidate-details.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Candidate Details
                 </NuxtLink>
               </li>
@@ -141,19 +141,19 @@
             <ul class="space-y-4">
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="contact.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Help Center
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="faqs.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> FAQ'S
                 </NuxtLink>
               </li>
               <li
                 class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                <NuxtLink to="privacy-policy.html">
+                <NuxtLink to="">
                   <i class="mdi mdi-chevron-right"></i> Privacy Policy
                 </NuxtLink>
               </li>

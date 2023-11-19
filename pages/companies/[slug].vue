@@ -60,7 +60,7 @@
                       <div class="flex flex-wrap">
                         <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Website</label>
                         <div>
-                          <p class="mb-0 text-gray-500 dark:text-gray-300">www.Jobcytecnologypvt.ltd.com</p>
+                          <p class="mb-0 text-gray-500 dark:text-gray-300">{{ company.website }}</p>
                         </div>
                       </div>
                     </li>
@@ -108,9 +108,6 @@
         </div>
       </section>
       <!-- End grid -->
-
-
-
     </div>
   </div>
 </template>

@@ -12,12 +12,6 @@
           class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">52
           Opening Jobs</NuxtLink>
       </div>
-      <div class="absolute px-2 text-white bg-violet-500 top-3 ltr:right-0 rtl:left-0">
-        <span class="relative text-xs font-medium uppercase">4.9 <i class="mdi mdi-star-outline"></i></span>
-        <div
-          class="after:contant[] ltr:after:border-r-[11px] rtl:after:border-l-[11px] after:absolute after:border-b-[11px] ltr:after:-left-[11px] rtl:after:-right-[11px] after:top-0 after:border-t-[11px] after:border-t-transparent after:border-violet-500 after:border-b-transparent">
-        </div>
-      </div>
     </div>
   </div>
 </template>

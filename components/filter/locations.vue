@@ -3,29 +3,33 @@
     <p>Loading...</p>
   </div>
   <div v-else-if="locations">
-    <CardsBase>
-      <HeadingsH2>Locations</HeadingsH2>
-      <div v-for="location in locations" :key="location.id" class="flex items-center">
-        <input type="checkbox" class="mr-2" />
-        <NuxtLink :to="`/locations/${location.slug}`" class=" flex-grow text-blue-500 hover:underline">{{ location.name }}
-        </NuxtLink>
-        <span class="text-sm text-gray-500">({{ location.job_count }})</span>
+    <div class="col-span-12 md:col-span-6 xl:col-span-4">
+      <div class="mt-10 rounded bg-gray-50 dark:bg-neutral-700">
+        <div class="p-6">
+          <ul class="space-y-4">
+            <li v-for="location in locations" :key="location.id" class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
+              <NuxtLink :to="`/locations/${location.slug}`" class="text-gray-900 dark:text-white"> {{
+                location.name }} <span
+                  class="px-2 py-1 rounded bg-sky-500/20 text-11 text-sky-500 ltr:float-right rtl:float-left">{{
+                    location.job_count }}</span></NuxtLink>
+            </li>
+          </ul>
+        </div>
       </div>
-
-    </CardsBase>
+    </div>
   </div>
   <div v-else>
-    what is this?
+    no categories found
   </div>
-  </template>
+</template>
 
-  <script setup>
-  const { locations } = defineProps({
-    locations: {
-      type: Array,
-      required: true
-    }
-  })
+<script setup>
+const { locations } = defineProps({
+  locations: {
+    type: Array,
+    required: true
+  }
+})
 
-  </script>
+</script>
   
