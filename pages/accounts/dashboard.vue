@@ -1,4 +1,6 @@
 <template>
+  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
+
   <div class="flex flex-col items-center justify-center">
     <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
     <div v-if="user">
@@ -17,6 +19,19 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAccountStore } from '~/store/accounts'
+
+const breadcrumbs = ref([
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Dashboard',
+    to: '/accounts/dashboard',
+  },
+])
+
+const pageTitle = ref('Dashboard')
 
 const accountStore = useAccountStore()
 const router = useRouter()

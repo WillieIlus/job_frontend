@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="page-content">
 
-      <NavigationBreadcrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
 
       <!-- Start grid -->
       <section class="py-20">
@@ -79,6 +79,19 @@ const fetchCompanies = async () => {
 const fetchCategories = async () => {
   await categoriesStore.fetchCategories()
 }
+
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Companies',
+    to: '/companies',
+  },
+]
+
+const pageTitle = 'Companies'
 
 onMounted(() => {
   fetchCompanies()

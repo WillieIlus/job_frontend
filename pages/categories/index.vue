@@ -3,7 +3,7 @@
   <div class="main-content">
     <div class="page-content">
 
-      <NavigationBreadcrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
 
       <!-- Start grid -->
       <section class="py-20">
@@ -50,15 +50,21 @@ import { storeToRefs } from 'pinia';
 import { useCategoryStore } from '@/store/categories';
 import { useRouter } from 'vue-router';
 
-const breadcrumbs = [
+
+const breadcrumbs = ref([
   {
     label: 'Home',
-    action: () => router.push({ name: 'index' }),
+    to: '/',
   },
   {
     label: 'Categories',
+    to: '/categories',
   },
-];
+
+]);
+
+const pageTitle = ref('Categories');
+
 
 const categoryStore = useCategoryStore();
 const { categories, loading, error } = storeToRefs(categoryStore);

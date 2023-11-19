@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <div class="page-content">
-      <NavigationBreadcrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" />
       <!-- Start grid -->
       <section v-if="company" class="py-20">
         <div class="container mx-auto">
@@ -93,7 +93,7 @@
               <div class="p-6 border rounded border-gray-100/50 dark:border-neutral-600">
                 <div>
                   <h6 class="mb-3 text-gray-900 text-17 dark:text-gray-50">About Company</h6>
-                  <p class="mb-4 text-gray-500 dark:text-gray-300">{{ company.description}}</p>
+                  <p class="mb-4 text-gray-500 dark:text-gray-300">{{ company.description }}</p>
                 </div>
                 <div class="pt-10">
                   <h6 class="mb-0 text-gray-900 text-17 fw-bold dark:text-gray-50">Current Opening</h6>
@@ -114,10 +114,11 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useCompanyStore } from '~/store/companies'
 import { useJobStore } from '~/store/jobs'
+import { routeLocationKey } from 'vue-router'
 
 const companyStore = useCompanyStore()
 const jobStore = useJobStore()
@@ -125,14 +126,35 @@ const jobStore = useJobStore()
 const { company, loading, error } = storeToRefs(companyStore)
 const { jobs } = storeToRefs(jobStore)
 
+const route = useRoute()
+const router = useRouter()
+
 const fetchCompany = async () => {
-  const { params } = useRoute()
+  const { params } = route()
   await companyStore.fetchCompany(params.slug)
 }
 
 const fetchJobs = async () => {
   await jobStore.fetchJobs()
 }
+
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Companies',
+    to: '/companies',
+  },
+  {
+    label: route.params.slug || 'Company',
+    to: route.fullPath,
+  }
+]
+
+const pageTitle = route.params.slug || 'Company'
+
 
 onMounted(() => {
   fetchCompany()

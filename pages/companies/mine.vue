@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Companies</h1>
+    <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
+
     <div v-if="loading">
       <p>Loading...</p>
     </div>
@@ -25,6 +26,19 @@ import { useCompanyStore } from '~/store/companies'
 const companyStore = useCompanyStore()
 const { companies, loading, error } = storeToRefs(companyStore)
 const { fetchMyCompanies } = companyStore
+
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'My Companies',
+    to: '/companies/mine',
+  },
+]
+
+const pageTitle = 'My Companies'
 
 onMounted(async () => {
   await fetchMyCompanies()

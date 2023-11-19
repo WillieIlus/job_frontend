@@ -1,6 +1,7 @@
 
 <template>
-  <CardsBreadcrumbs :items="breadcrumbs" />
+  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
+
   <CardsBase>
     <h1>Locations</h1>
     <div v-if="locations">
@@ -22,30 +23,35 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useLocationStore } from '@/store/locations';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+
+const locationStore = useLocationStore()
+
+const { location, loading, error } = storeToRefs(locationStore)
+const router = useRouter()
+const route = useRoute()
 
 const breadcrumbs = [
   {
     label: 'Home',
-    action: () => router.push({ name: 'index' }),
+    to: '/',
   },
   {
     label: 'Locations',
-    action: () => router.push({ name: 'locations' }),
+    to: '/locations',
   },
   {
-    label: 'Location Detail',
-  },
-];
+    label: 'route.params.slug' || 'Location',
+    to: route.fullPath,
+  }
+]
 
-const locationStore = useLocationStore();
-const { location, loading, error } = storeToRefs(locationStore);
-const router = useRouter();
+const pageTitle = 'route.params.slug' || 'Location'
 
 const { fetchLocation } = locationStore;
 
-onMounted(() => {
-  fetchLocation(router.currentRoute.value.params.slug);
+onMounted(async () => {
+  await fetchLocation(router.currentRoute.value.params.slug);
 });
 
 

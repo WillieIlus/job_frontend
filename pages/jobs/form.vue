@@ -1,4 +1,5 @@
 <template>
+  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
   <div v-if="loading" class="flex justify-center items-center h-screen">
     <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
   </div>
@@ -333,6 +334,22 @@ const onSubmit = async (values) => {
   }
 }
 
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Jobs',
+    to: '/jobs',
+  },
+  {
+    label: 'Create Job',
+    to: '/jobs/create',
+  }
+]
+
+const pageTitle = 'Create Job'
 
 
 onMounted(() => {

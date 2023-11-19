@@ -1,6 +1,6 @@
 
 <template>
-  <NavigationBreadcrumbs :items="breadcrumbs" />
+  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
   <CardsBase>
     <h1>Categories</h1>
     <div v-if="categories">
@@ -19,25 +19,31 @@
     </div>
   </CardsBase>
 </template>
+
 <script setup>
+
 import { storeToRefs } from 'pinia';
 import { useCategoryStore } from '@/store/categories';
 import { useRouter, useRoute } from 'vue-router';
 
+const route = useRoute();
+
 const breadcrumbs = [
   {
     label: 'Home',
-    action: () => router.push({ name: 'index' }),
+    to: '/',
   },
   {
     label: 'Categories',
-    action: () => router.push({ name: 'categories' }),
+    to: '/categories',
   },
   {
-    label: 'Category Detail',
+    label: route.params.slug || 'Category', 
+    to: route.fullPath,
   },
 ];
 
+const pageTitle = route.params.slug || 'Category'; 
 const categoryStore = useCategoryStore();
 const { category, loading, error } = storeToRefs(categoryStore);
 const router = useRouter();

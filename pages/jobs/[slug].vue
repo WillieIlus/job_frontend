@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <div class="page-content">
-      <NavigationBreadcrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
       <!-- Start grid -->
       <section v-if="job" class="py-16">
         <div class="container mx-auto">
@@ -225,19 +225,17 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useJobStore } from '~/store/jobs'
+import { useRouter, useRoute } from 'vue-router'
 
-
-const route = useRoute()
-const router = useRouter()
 const jobStore = useJobStore()
 
 const { job, jobs, loading, error } = storeToRefs(jobStore)
+const route = useRoute()
+const router = useRouter()
 
 const fetchJob = async () => {
   await jobStore.fetchJob()
 }
-
-
 
 const fetchJobs = async () => {
   await jobStore.fetchJobs()
@@ -246,16 +244,20 @@ const fetchJobs = async () => {
 const breadcrumbs = [
   {
     label: 'Home',
-    action: () => router.push({ name: 'index' }),
+    to: '/',
   },
   {
     label: 'Jobs',
-    action: () => router.push({ name: 'jobs' }),
+    to: '/jobs',
   },
   {
-    label: 'Job Description',
-  },
-];
+    label: 'route.params.slug' || 'Jobs',
+    to: route.fullPath,
+  }
+]
+
+const pageTitle = 'route.params.slug' || 'Jobs'
+
 
 onMounted(async () => {
   await fetchJob(route.params.slug),

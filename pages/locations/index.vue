@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="page-content">
 
-      <NavigationBreadcrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" />
 
       <!-- Start grid -->
       <section class="py-20">
@@ -52,12 +52,15 @@ import { useRouter } from 'vue-router';
 const breadcrumbs = [
   {
     label: 'Home',
-    action: () => router.push({ name: 'index' }),
+    to: '/',
   },
   {
     label: 'Locations',
+    to: '/locations',
   },
-];
+]
+
+const pageTitle = 'Locations'
 
 const locationStore = useLocationStore();
 const { locations, loading, error } = storeToRefs(locationStore);

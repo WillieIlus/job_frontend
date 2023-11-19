@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="page-content">
 
-      <NavigationBreadCrumbs />
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
 
       <!-- Start team -->
       <section class="py-16">
@@ -516,6 +516,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { DocumentArrowUpIcon, DocumentCheckIcon, RectangleGroupIcon, MapPinIcon, EyeIcon, CursorArrowRippleIcon, HeartIcon, CurrencyDollarIcon } from '@heroicons/vue/24/outline'
+import { useRoute } from 'vue-router'
 
 import { useJobStore } from '~/store/jobs'
 import { useCategoryStore } from '~/store/categories'
@@ -525,6 +526,7 @@ import { storeToRefs } from 'pinia'
 const jobStore = useJobStore()
 const categoryStore = useCategoryStore()
 const locationStore = useLocationStore()
+const route = useRoute()
 
 const { jobs, loading, error } = storeToRefs(jobStore)
 const { categories } = storeToRefs(categoryStore)
@@ -559,6 +561,19 @@ const selectLocation = (location) => {
 const jobCount = computed(() => jobs.value.length)
 const jobStart = computed(() => jobCount.value > 0 ? 1 : 0)
 const jobEnd = computed(() => jobs.value.length > 12 ? 12 : jobs.value.length)
+
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Jobs',
+    to: '/jobs',
+  }
+]
+
+const pageTitle = 'Jobs'
 
 onMounted(async () => {
   await fetchJobs()

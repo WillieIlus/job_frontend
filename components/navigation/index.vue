@@ -94,7 +94,7 @@ const { user, isLoggedIn } = storeToRefs(accountStore)
 const route = useRoute()
 
 const popup = ref(false)
-const navbarCollapse = ref(false)
+const navbarCollapse = ref(true)
 const userMenuOpen = ref(false)
 
 

@@ -1,4 +1,6 @@
 <template>
+  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
+
   <div v-if="loading" class="flex justify-center items-center">
     <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
   </div>
@@ -105,6 +107,23 @@ const fetchLocations = async () => {
 const getUser = async () => {
   await accountStore.getUser()
 }
+
+const breadcrumbs = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Companies',
+    to: '/companies',
+  },
+  {
+    label: 'Create Company',
+    to: '/companies/create',
+  },
+]
+
+const pageTitle = 'Create Company'
 
 const onLogoChange = (event) => {
   logo.value = event.target.files[0]

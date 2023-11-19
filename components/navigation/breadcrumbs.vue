@@ -7,12 +7,12 @@
             <h3 class="mb-4 text-[26px]">{{ pageTitle }}</h3>
             <div class="page-next">
               <nav class="inline-block" aria-label="breadcrumb text-center">
-                <ol class="flex flex-wrap justify-center text-sm font-medium uppercase">
-                  <li v-for="(item, index) in items" :key="index">
-                    <NuxtLink :to="item.to"  class="mx-7 px-7" :class="{ 'text-primary': item.action, 'active': !item.action, 'cursor-pointer': item.action, 'cursor-not-allowed': !item.action }">
+                <ol class="flex flex-wrap justify-center text-sm font-medium uppercase items-center">
+                  <li v-for="(item, index) in items" :key="index" class="flex items-center">
+                    <NuxtLink :to="item.to" class="mx-2 px-2" :class="{ 'text-primary': item.action, 'active': !item.action, 'cursor-pointer': item.action, 'cursor-not-allowed': !item.action }">
                       {{ item.label }}
                     </NuxtLink>
-                    <span v-if="!isLast(index)" class="mx-7 px-7"> | </span>
+                    <span v-if="!isLast(index)" class="mx-2"> | </span>
                   </li>
                 </ol>
               </nav>
@@ -26,28 +26,32 @@
   </section>
 </template>
 
+
 <script setup>
 import { defineProps, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
+const route = useRoute();
 
-const props = defineProps(['items']);
-
-const pageTitle = ref('');
-
-const route = useRoute(); 
-
-watch(() => {
-  pageTitle.value = route.meta.title || 'Alphajiri Jobs';
+const props = defineProps({
+  pageTitle: {
+    type: String,
+    default: 'Alphajiri Jobs',
+  },
+  items: {
+    type: Array,
+    default: () => [],
+  },
 });
 
-const isLast = (index) => index === props.items.length - 1;
+const isLast = (index) => {
+  return index === props.items.length - 1;
+};
 
 const selectItem = (item) => {
   if (item.action) {
     item.action();
   }
 };
-
 
 </script>
