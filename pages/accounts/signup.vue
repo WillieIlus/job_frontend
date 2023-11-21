@@ -25,26 +25,24 @@
                     <div class="flex flex-col justify-center h-full p-12">
                       <div class="text-center">
                         <h5 class="text-[18.5px] text-white">Let's Get Started</h5>
-                        <p class="mt-3 text-gray-50">Sign Up and get access to all the features of Jobcy</p>
+                        <p class="mt-3 text-gray-50">Sign Up and get access to all the features of Alphajiri Jobs</p>
                       </div>
-                      <form action="index.html" class="mt-8">
+                      <Form @submit="onSubmit" :validation-schema="schema" class="mt-8">
                         <div class="mb-5">
-                          <label for="usernameInput" class="text-white">Username</label>
-                          <input type="text"
-                            class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                            required="" id="usernameInput" placeholder="Enter your username">
+                          <FormsInput v-model="first_name" label="First Name" name="first_name" id="first_name" />
                         </div>
                         <div class="mb-5">
-                          <label for="passwordInput" class="text-white">Email</label>
-                          <input type="email"
-                            class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                            required="" id="emailInput" placeholder="Enter your email">
+                          <FormsInput v-model="email" label="Email" name="email" id="email" type="email" />
                         </div>
                         <div class="mb-5">
-                          <label for="emailInput" class="text-white">Password</label>
-                          <input type="password"
-                            class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                            id="passwordInput" placeholder="Enter your password">
+                          <FormsInput v-model="phone" label="Phone" name="phone" id="phone" />
+                        </div>
+                        <div class="mb-5">
+                          <FormsInput v-model="password" label="Password" name="password" id="password" type="password" />
+                        </div>
+                        <div class="mb-5">
+                          <FormsInput v-model="password_confirmation" label="Password Confirmation"
+                            name="password_confirmation" id="password_confirmation" type="password" />
                         </div>
                         <div class="mb-4">
                           <div><input
@@ -61,10 +59,11 @@
                             Up
                           </button>
                         </div>
-                      </form>
+                      </Form>
                       <div class="text-center">
-                        <p class="text-white">Already a member ? <a href="sign-in.html"
-                            class="text-white underline fw-medium"> Sign In </a></p>
+                        <p class="text-white">Already a member ? <NuxtLink to="/accounts/login"
+                            class="text-white underline fw-medium"> Sign In </NuxtLink>
+                        </p>
                       </div>
                     </div>
                   </div>

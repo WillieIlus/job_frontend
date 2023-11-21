@@ -25,38 +25,26 @@
                     <div class="flex flex-col justify-center h-full p-12">
                       <div class="text-center">
                         <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
-                        <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
+                        <p class="mt-3 text-white/80">Sign in to continue to Alphajiri Jobs.</p>
                       </div>
-                      <form action="index.html" class="mt-8">
+                      <Form @submit="onSubmit" :validation-schema="schema" class="mt-8">
                         <div class="mb-5">
-                          <label for="usernameInput" class="text-white">Username</label>
-                          <input type="text"
-                            class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                            required="" id="usernameInput" placeholder="Enter your username">
+                          <FormsInput v-model="email" label="Email" name="email" id="email" />
                         </div>
                         <div class="mb-5">
-                          <label for="emailInput" class="text-white">Password</label>
-                          <input type="password"
-                            class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                            id="passwordInput" placeholder="Enter your password">
-                        </div>
-                        <div><input
-                            class="align-middle border-transparent rounded focus:ring-0 focus:ring-offset-0 group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500"
-                            type="checkbox" id="flexCheckDefault">
-                          <a href="reset-password.html" class="text-white ltr:float-right rtl:float-left">Forgot
-                            Password?</a>
+                          <FormsInput v-model="password" label="Password" name="password" id="password" type="password" />
+                          <a href="reset-password.html" class="text-white ltr:float-right rtl:float-left">Forgot Password?</a>
                           <label class="text-white align-middle" for="flexCheckDefault">Remember me</label>
                         </div>
                         <div class="my-8 text-center">
                           <button type="submit"
-                            class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Sign
-                            Up
+                            class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Sign In
                           </button>
                         </div>
-                      </form>
+                      </Form>
                       <div class="text-center">
-                        <p class="text-white">Already a member ? <a href="sign-up.html"
-                            class="text-white underline fw-medium"> Sign In </a></p>
+                        <p class="text-white">Not a member ? <NuxtLink to="/accounts/signup"
+                            class="text-white underline fw-medium"> Sign UP </NuxtLink></p>
                       </div>
                     </div>
                   </div>

@@ -1,170 +1,194 @@
 <template>
-  <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
-  <div v-if="loading" class="flex justify-center items-center h-screen">
-    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
-  </div>
-  <div v-else-if="error" class="flex justify-center">
-    <div class="text-red-500">Error: {{ error }}</div>
-  </div>
-  <div v-else>
-    <div class="bg-white rounded-lg p-6 shadow-md">
-      <h1 class="text-2xl font-semibold mb-4">Job Form</h1>
-      <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <FormsInput v-model="title" label="Title" name="title" id="title" class="w-full sm:w-1/2 px-2" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <FormsInput v-model="email" label="Email" name="email" id="email" class="w-full sm:w-1/2 px-2" />
+  <div class="main-content">
+    <div class="page-content">
+      <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" />
+      <section class="py-16">
+        <div class="container mx-auto">
+          <div class="grid grid-cols-12 xl:gap-10 gap-y-12">
+            <div class="col-span-12 lg:col-span-8">
+              <div v-if="loading" class="flex justify-center items-center h-screen">
+                <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+              </div>
+              <div v-else-if="error" class="flex justify-center">
+                <div class="text-red-500">Error: {{ error }}</div>
+              </div>
+              <div v-else>
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                  <h1 class="text-2xl font-semibold mb-4">Job Form</h1>
+                  <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <FormsInput v-model="title" label="Title" name="title" id="title" class="w-full sm:w-1/2 px-2" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <FormsInput v-model="email" label="Email" name="email" id="email" class="w-full sm:w-1/2 px-2" />
+                      </div>
+                    </div>
+                    <FormsTextarea v-model="description" label="Description" name="description" id="description" />
+                    <FormsTextarea v-model="requirements" label="Requirements" name="requirements" id="requirements" />
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <!-- < -->
+                        <label class="text-gray-700 dark:text-gray-300" for="image">Image</label>
+                        <input @change="onImageChange" type="file" id="image" name="image"
+                          class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="category">Company</label>
+                        <Field as="select" v-model="company"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="company" name="company">
+                          <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}
+                          </option>
+                        </Field>
+                        <ErrorMessage name="company" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <FormsInput v-model="website" label="Website" name="website" id="website"
+                          class="w-full sm:w-1/2 px-2" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <FormsInput v-model="phone" label="Phone" name="phone" id="phone" class="w-full sm:w-1/2 px-2" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="category">Category</label>
+                        <Field as="select" v-model="category"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="category" name="category">
+                          <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name
+                          }}</option>
+                        </Field>
+                        <ErrorMessage name="category" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="location">Location</label>
+                        <Field as="select" v-model="location"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="location" name="location">
+                          <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name
+                          }}</option>
+                        </Field>
+                        <ErrorMessage name="location" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="job_type">Job Type</label>
+                        <Field as="select" v-model="job_type"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="job_type" name="job_type">
+                          <option v-for="job_type in jobTypes" :key="job_type.value" :value="job_type.value">{{
+                            job_type.label }}
+                          </option>
+                        </Field>
+                        <ErrorMessage name="job_type" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="salary_type">Salary Type</label>
+                        <Field as="select" v-model="salary_type"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="salary_type" name="salary_type">
+                          <option v-for="salary_type in salaryTypes" :key="salary_type.value" :value="salary_type.value">
+                            {{
+                              salary_type.label }}</option>
+                        </Field>
+                        <ErrorMessage name="salary_type" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="currency">Currency</label>
+                        <Field as="select" v-model="currency"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="currency" name="currency">
+                          <option v-for="currency in currencyTypes" :key="currency.value" :value="currency.value">{{
+                            currency.label }}
+                          </option>
+                        </Field>
+                        <ErrorMessage name="currency" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="salary">Salary</label>
+                        <Field v-model="salary" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="salary" name="salary" />
+                        <ErrorMessage name="salary" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="openings">Openings</label>
+                        <Field v-model="openings" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="openings" name="openings" />
+                        <ErrorMessage name="openings" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="work_experience">Work Experience</label>
+                        <Field v-model="work_experience" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="work_experience" name="work_experience" />
+                        <ErrorMessage name="work_experience" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="education_level">Education Level</label>
+                        <Field v-model="education_level" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="education_level" name="education_level" />
+                        <ErrorMessage name="education_level" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="work_hours">Work Hours</label>
+                        <Field v-model="work_hours" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="work_hours" name="work_hours" />
+                        <ErrorMessage name="work_hours" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between -mx-2">
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="vacancies">Vacancies</label>
+                        <Field v-model="vacancies" type="number"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="vacancies" name="vacancies" />
+                        <ErrorMessage name="vacancies" class="text-red-500" />
+                      </div>
+                      <div class="w-full sm:w-1/2 px-2">
+                        <label class="text-gray-700 dark:text-gray-300" for="deadline">Deadline</label>
+                        <Field v-model="deadline" type="date"
+                          class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+                          id="deadline" name="deadline" />
+                        <ErrorMessage name="deadline" class="text-red-500" />
+                      </div>
+                    </div>
+                    <div class="flex justify-center">
+                      <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
+                        <span v-if="submitting">Cancel</span>
+                        <span v-else>Cancel</span>
+                      </ButtonsRed>
+                      <ButtonsGreen :disabled="submitting" type="submit">
+                        <span v-if="submitting">Creating Job…</span>
+                        <span v-else>Create Job</span>
+                      </ButtonsGreen>
+                    </div>
+                  </Form>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-4">
+              <div class="bg-white rounded-lg p-6 shadow-md">
+                job script will display here
+              </div>
+            </div>
           </div>
         </div>
-        <FormsTextarea v-model="description" label="Description" name="description" id="description" />
-        <FormsTextarea v-model="requirements" label="Requirements" name="requirements" id="requirements" />
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <!-- < -->
-            <label class="text-gray-700 dark:text-gray-300" for="image">Image</label>
-            <input @change="onImageChange" type="file" id="image" name="image"
-              class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="category">Company</label>
-            <Field as="select" v-model="company"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="company" name="company">
-              <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}</option>
-            </Field>
-            <ErrorMessage name="company" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <FormsInput v-model="website" label="Website" name="website" id="website" class="w-full sm:w-1/2 px-2" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <FormsInput v-model="phone" label="Phone" name="phone" id="phone" class="w-full sm:w-1/2 px-2" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="category">Category</label>
-            <Field as="select" v-model="category"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="category" name="category">
-              <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            </Field>
-            <ErrorMessage name="category" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="location">Location</label>
-            <Field as="select" v-model="location"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="location" name="location">
-              <option v-for="location in locations" :key="location.id" :value="location.id">{{ location.name }}</option>
-            </Field>
-            <ErrorMessage name="location" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="job_type">Job Type</label>
-            <Field as="select" v-model="job_type"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="job_type" name="job_type">
-              <option v-for="job_type in jobTypes" :key="job_type.value" :value="job_type.value">{{ job_type.label }}
-              </option>
-            </Field>
-            <ErrorMessage name="job_type" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="salary_type">Salary Type</label>
-            <Field as="select" v-model="salary_type"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="salary_type" name="salary_type">
-              <option v-for="salary_type in salaryTypes" :key="salary_type.value" :value="salary_type.value">{{
-                salary_type.label }}</option>
-            </Field>
-            <ErrorMessage name="salary_type" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="currency">Currency</label>
-            <Field as="select" v-model="currency"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="currency" name="currency">
-              <option v-for="currency in currencyTypes" :key="currency.value" :value="currency.value">{{ currency.label }}
-              </option>
-            </Field>
-            <ErrorMessage name="currency" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="salary">Salary</label>
-            <Field v-model="salary" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="salary" name="salary" />
-            <ErrorMessage name="salary" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="openings">Openings</label>
-            <Field v-model="openings" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="openings" name="openings" />
-            <ErrorMessage name="openings" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="work_experience">Work Experience</label>
-            <Field v-model="work_experience" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="work_experience" name="work_experience" />
-            <ErrorMessage name="work_experience" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="education_level">Education Level</label>
-            <Field v-model="education_level" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="education_level" name="education_level" />
-            <ErrorMessage name="education_level" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="work_hours">Work Hours</label>
-            <Field v-model="work_hours" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="work_hours" name="work_hours" />
-            <ErrorMessage name="work_hours" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-between -mx-2">
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="vacancies">Vacancies</label>
-            <Field v-model="vacancies" type="number"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="vacancies" name="vacancies" />
-            <ErrorMessage name="vacancies" class="text-red-500" />
-          </div>
-          <div class="w-full sm:w-1/2 px-2">
-            <label class="text-gray-700 dark:text-gray-300" for="deadline">Deadline</label>
-            <Field v-model="deadline" type="date"
-              class="form-control w-full py-2 px-3 text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-              id="deadline" name="deadline" />
-            <ErrorMessage name="deadline" class="text-red-500" />
-          </div>
-        </div>
-        <div class="flex justify-center">
-          <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
-            <span v-if="submitting">Cancel</span>
-            <span v-else>Cancel</span>
-          </ButtonsRed>
-          <ButtonsGreen :disabled="submitting" type="submit">
-            <span v-if="submitting">Creating Job…</span>
-            <span v-else>Create Job</span>
-          </ButtonsGreen>
-        </div>
-      </Form>
+      </section>
     </div>
   </div>
 </template>

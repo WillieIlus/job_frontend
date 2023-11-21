@@ -251,17 +251,17 @@ const breadcrumbs = [
     to: '/jobs',
   },
   {
-    label: 'route.params.slug' || 'Jobs',
+    label: 'Jobs' || 'route.params.slug',
     to: route.fullPath,
   }
 ]
 
-const pageTitle = 'route.params.slug' || 'Jobs'
+const pageTitle = 'Jobs' || 'route.params.slug'
 
 
-onMounted(async () => {
-  await fetchJob(route.params.slug),
-  await fetchJobs({ category: job.category })
+onMounted (() => {
+  fetchJob(),
+ fetchJobs({ category: job.category })
 
 })
 
