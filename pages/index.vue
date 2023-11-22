@@ -10,7 +10,7 @@
                                 <div class="col-span-12 lg:col-span-7">
                                     <div class="mb-3 ltr:mr-14 rtl:ml-14">
                                         <h6 class="mb-3 text-sm text-gray-900 uppercase dark:text-gray-50">We have 150,000+ live jobs</h6>
-                                        <h1 class="mb-3 text-5xl font-semibold leading-tight text-gray-900 dark:text-gray-50">Find your dream jobs <br> with <span class="font-bold group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Jobcy</span></h1>
+                                        <h1 class="mb-3 text-5xl font-semibold leading-tight text-gray-900 dark:text-gray-50">Find your dream jobs <br> with <span class="font-bold group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Alphajri Jobs</span></h1>
                                         <p class="text-lg font-light text-gray-500 whitespace-pre-line dark:text-gray-300">Find jobs, create trackable resumes and enrich your
                                                 applications.Carefully crafted after analyzing the needs of different 
                                                 industries.</p>
@@ -637,7 +637,7 @@
                                                                 <div class="mb-2 mb-md-0">
                                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
                                                                     </h5>
-                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Alphajri Jobs Technology Pvt.Ltd</p>
                                                                 </div>
                                                             </div>
                                                             <!--end col-->
@@ -917,7 +917,7 @@
                                                                 <div class="mb-2 mb-md-0">
                                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
                                                                     </h5>
-                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Alphajri Jobs Technology Pvt.Ltd</p>
                                                                 </div>
                                                             </div>
                                                             <!--end col-->
@@ -1193,7 +1193,7 @@
                                                                 <div class="mb-2 mb-md-0">
                                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
                                                                     </h5>
-                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Alphajri Jobs Technology Pvt.Ltd</p>
                                                                 </div>
                                                             </div>
                                                             <!--end col-->
@@ -1471,7 +1471,7 @@
                                                                 <div class="mb-2 mb-md-0">
                                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
                                                                     </h5>
-                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Alphajri Jobs Technology Pvt.Ltd</p>
                                                                 </div>
                                                             </div>
                                                             <!--end col-->
@@ -1752,7 +1752,7 @@
                                                                 <div class="mb-2 mb-md-0">
                                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
                                                                     </h5>
-                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Alphajri Jobs Technology Pvt.Ltd</p>
                                                                 </div>
                                                             </div>
                                                             <!--end col-->

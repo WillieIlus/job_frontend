@@ -11,10 +11,9 @@
                 <div class="grid flex-col grid-cols-12 ">
                   <div class="col-span-12 lg:col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
                     <div class="p-10">
-                      <a href="index.html">
-                        <img src="~/assets/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
+                      <NuxtLink to="/"> <img src="~/assets/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
                         <img src="~/assets/images/logo-dark.png" alt="" class="block mx-auto dark:hidden">
-                      </a>
+                      </NuxtLink>
                       <div class="mt-5">
                         <img src="~/assets/images/auth/sign-in.png" alt="">
                       </div>
@@ -33,18 +32,20 @@
                         </div>
                         <div class="mb-5">
                           <FormsInput v-model="password" label="Password" name="password" id="password" type="password" />
-                          <a href="reset-password.html" class="text-white ltr:float-right rtl:float-left">Forgot Password?</a>
+                          <NuxtLink to="" class="text-white ltr:float-right rtl:float-left">Forgot Password?</NuxtLink>
                           <label class="text-white align-middle" for="flexCheckDefault">Remember me</label>
                         </div>
                         <div class="my-8 text-center">
                           <button type="submit"
-                            class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Sign In
+                            class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Sign
+                            In
                           </button>
                         </div>
                       </Form>
                       <div class="text-center">
                         <p class="text-white">Not a member ? <NuxtLink to="/accounts/signup"
-                            class="text-white underline fw-medium"> Sign UP </NuxtLink></p>
+                            class="text-white underline fw-medium"> Sign UP </NuxtLink>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -108,8 +109,8 @@ const onSubmit = async (values) => {
     }
   } finally {
     submitting.value = false
-        // Only navigate if there's no error
-        if (!error.value) {
+    // Only navigate if there's no error
+    if (!error.value) {
       router.push('/jobs');
     }
 

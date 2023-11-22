@@ -11,10 +11,10 @@
                 <div class="grid flex-col grid-cols-12">
                   <div class="col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
                     <div class="p-10">
-                      <a href="index.html">
+                      <NuxtLink to="/">
                         <img src="~/assets/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
                         <img src="~/assets/images/logo-dark.png" alt="" class="block mx-auto dark:hidden">
-                      </a>
+                      </NuxtLink>
                       <div class="mt-5">
                         <img src="~/assets/images/auth/sign-up.png" alt="">
                       </div>
