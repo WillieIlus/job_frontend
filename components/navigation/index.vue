@@ -46,28 +46,31 @@
           </div>
           <div>
             <div class="relative dropdown ltr:mr-4 rtl:ml-4">
-              <button  type="button" class="flex items-center px-4 py-5 dropdown-toggle"
-                id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <div v-if="isLoggedIn">
-                <img class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" :src="user.avatar" :alt="first_name">
-                <span class="hidden fw-medium xl:block dark:text-gray-50">{{ user.first_name }}</span>
-                </div>
-                <div v-else>
-                  <span class="hidden fw-medium xl:block dark:text-gray-50">Hey</span>
-                </div>
+              <button  @click="togglePopup" v-if="isLoggedIn" type="button" class="flex items-center px-4 py-5 dropdown-toggle" id="page-header-user-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <img  class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" :src="user.avatar"
+                  :alt="first_name"> <span class=" fw-medium xl:block dark:text-gray-50">{{ user.first_name }}</span>
               </button>
-              <ul v-if="isLoggedIn"
-                class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
+              <button  @click="togglePopup" v-else type="button" class="flex items-center px-4 py-5 dropdown-toggle" id="page-header-user-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <img  class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" 
+                  > <span  class=" fw-medium xl:block dark:text-gray-50"></span>
+              </button>
+              <div v-if="navbarCollapse" :class="{ 'block': navbarCollapse, 'hidden': !navbarCollapse }">
+              <ul v-if="isLoggedIn" 
+                class="absolute top-auto z-50  w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
                 id="profile/log" aria-labelledby="navNotifications">
+                
                 <li v-for="(item, index) in userItems" :key="index"
                   class="p-2 dropdown-item group/dropdown dark:text-gray-300">
                   <NuxtLink :to="item.Link.to"
                     class="text-15 font-medium text-gray-800  group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50">
                     {{ item.name }}</NuxtLink>
                 </li>
+                
               </ul>
               <ul v-else
-                class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
+                class="absolute top-auto z-50  w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
                 id="profile/log" aria-labelledby="navNotifications">
                 <li v-for="(item, index) in loginItems" :key="index"
                   class="p-2 dropdown-item group/dropdown dark:text-gray-300">
@@ -76,6 +79,7 @@
                     {{ item.name }}</NuxtLink>
                 </li>
               </ul>
+            </div>
 
             </div>
           </div>
@@ -89,13 +93,15 @@
             </li>
           </ul>
           <div v-if="isLoggedIn" class="flex items-center space-x-4">
-            <NuxtLink to="/jobs/form" class="py-2 px-3 text-center text-white rounded-md group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">
+            <NuxtLink to="/jobs/form"
+              class="py-2 px-3 text-center text-white rounded-md group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">
               New Job
             </NuxtLink>
-            <NuxtLink to="/companies/form" class="py-2 px-3 text-center text-white rounded-md group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">
+            <NuxtLink to="/companies/form"
+              class="py-2 px-3 text-center text-white rounded-md group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">
               New Company
             </NuxtLink>
-          </div> 
+          </div>
         </div>
       </div>
     </div>

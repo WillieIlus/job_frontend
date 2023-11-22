@@ -108,6 +108,10 @@ const onSubmit = async (values) => {
     }
   } finally {
     submitting.value = false
+        // Only navigate if there's no error
+        if (!error.value) {
+      router.push('/jobs');
+    }
 
   }
 }
