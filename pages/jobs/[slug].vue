@@ -2,8 +2,10 @@
   <div class="main-content">
     <div class="page-content">
       <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" /> 
+      This is it {{ job }}
       <!-- Start grid -->
-      <section v-if="job" class="py-16">
+      <!-- <section v-if="job" class="py-16">
+        
         <div class="container mx-auto">
           <div class="grid grid-cols-12 gap-y-10 lg:gap-10">
             <div class="col-span-12 lg:col-span-8">
@@ -215,7 +217,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
       <!-- End grid -->
 
     </div>
@@ -234,7 +236,8 @@ const route = useRoute()
 const router = useRouter()
 
 const fetchJob = async () => {
-  await jobStore.fetchJob()
+  const { params } = route()
+  await jobStore.fetchJob(params.slug)
 }
 
 const fetchJobs = async () => {
@@ -251,18 +254,20 @@ const breadcrumbs = [
     to: '/jobs',
   },
   {
-    label: 'Jobs' || 'route.params.slug',
+    label: route.params.slug || 'Jobs',
     to: route.fullPath,
   }
 ]
 
-const pageTitle = 'Jobs' || 'route.params.slug'
+const pageTitle = route.params.slug || 'Jobs'
 
-
-onMounted (() => {
-  fetchJob(),
- fetchJobs({ category: job.category })
-
+onMounted(async () => {
+  await fetchJob()
+  await fetchJobs()
+  await fetchCategories()
+  await fetchLocations()
 })
+
+
 
 </script>

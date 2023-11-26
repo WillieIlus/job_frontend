@@ -8,6 +8,7 @@ export const useJobStore = defineStore('job', {
     job: null,
     loading: false,
     error: null,
+    queryString: ""
   }),
   getters: {
     getJobs: (state) => state.jobs,
@@ -28,14 +29,23 @@ export const useJobStore = defineStore('job', {
       }
     },
 
-    async fetchJobs() {
+    // async fetchJobs() {
+    //   await this.handleError(async () => {
+    //     const response = await fetch(`${BASE_URL}/jobs`);
+    //     const data = await response.json();
+    //     this.jobs = data;
+    //   });
+    // },
+
+    async fetchJobs(filters = {}) {
       await this.handleError(async () => {
-        const response = await fetch(`${BASE_URL}/jobs`);
+        // const response = await fetch(`${BASE_URL}/jobs?title=${queryString}`);
+        const response = await fetch(`${BASE_URL}/jobs?title=Graphic Designer needed`);
         const data = await response.json();
         this.jobs = data;
       });
     },
-
+    
     async fetchJobsByUser(userId) {
       await this.handleError(async () => {
         const response = await fetch(`${BASE_URL}/jobs?userId=${userId}`);
@@ -106,7 +116,7 @@ export const useJobStore = defineStore('job', {
           // deadline: deadline,
         };
 
-        const response = await fetch(`${BASE_URL}/jobs/`, {
+        const response = await fetch(`${BASE_URL}/jobs/?`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
