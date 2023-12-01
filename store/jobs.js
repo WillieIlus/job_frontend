@@ -8,7 +8,7 @@ export const useJobStore = defineStore('job', {
     job: null,
     loading: false,
     error: null,
-    queryString: ""
+    query: ""
   }),
   getters: {
     getJobs: (state) => state.jobs,
@@ -29,18 +29,13 @@ export const useJobStore = defineStore('job', {
       }
     },
 
-    // async fetchJobs() {
-    //   await this.handleError(async () => {
-    //     const response = await fetch(`${BASE_URL}/jobs`);
-    //     const data = await response.json();
-    //     this.jobs = data;
-    //   });
-    // },
-
     async fetchJobs(filters = {}) {
       await this.handleError(async () => {
-        // const response = await fetch(`${BASE_URL}/jobs?title=${queryString}`);
-        const response = await fetch(`${BASE_URL}/jobs?title=Graphic Designer needed`);
+        const queryString = Object.entries(filters)
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&');
+
+        const response = await fetch(`${BASE_URL}/jobs?${queryString}`);
         const data = await response.json();
         this.jobs = data;
       });

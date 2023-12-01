@@ -17,7 +17,7 @@
                 <div class="bg-white rounded-lg p-6 shadow-md">
                   <h1 class="text-2xl font-semibold mb-4">Company Form</h1>
                   <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
-                    <FormsInput v-model="name" label="Name" name="name" id="name" />
+                    <FormsInput v-model="name" type="text" label="Name" name="name" id="name" />
                     <FormsTextarea v-model="description" label="Description" name="description" id="description" />
                     <div class="flex flex-wrap justify-between -mx-2">
                       <FormsInput v-model="phone" label="Phone" name="phone" id="phone" class="w-full sm:w-1/2 px-2" />
@@ -54,12 +54,12 @@
                     <div class="flex flex-wrap justify-between -mx-2">
                       <div class="w-full sm:w-1/2 px-2">
                         <label class="text-gray-700 dark:text-gray-300" for="logo">Logo</label>
-                        <input @change="onLogoChange" type="file" id="logo" name="logo"
+                        <input @change="onFileChange('logo')" type="file" id="logo" name="logo"
                           class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white">
                       </div>
                       <div class="w-full sm:w-1/2 px-2">
                         <label class="text-gray-700 dark:text-gray-300" for="cover">Cover</label>
-                        <input @change="onCoverChange" type="file" id="cover" name="cover"
+                        <input @change="onFileChange('cover')" type="file" id="cover" name="cover"
                           class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white">
                       </div>
                     </div>
@@ -68,10 +68,10 @@
                         <span v-if="submitting">Cancel</span>
                         <span v-else>Cancel</span>
                       </ButtonsRed>
-                      <ButtonsGreen :disabled="submitting" type="submit">
-                        <span v-if="submitting">Creating Company…</span>
+                      <ButtonsBase :disabled="submitting" type="submit">
+                        <span v-if="submitting">Creating Company …</span>
                         <span v-else>Create Company</span>
-                      </ButtonsGreen>
+                      </ButtonsBase>
                     </div>
                   </Form>
                 </div>
@@ -147,24 +147,23 @@ const breadcrumbs = [
 
 const pageTitle = 'Create Company'
 
-const onLogoChange = (event) => {
-  logo.value = event.target.files[0]
+const onFileChange = (field) => (event) => {
+  values[field] = event.target.files[0]
 }
 
-const onCoverChange = (event) => {
-  cover.value = event.target.files[0]
-}
+const values = ref({
+  name: '',
+  description: '',
+  phone: '',
+  website: '',
+  email: '',
+  address: '',
+  category: '',
+  location: '',
+  logo: '',
+  cover: '',
+})
 
-const name = ref('')
-const description = ref('')
-const phone = ref('')
-const website = ref('')
-const email = ref('')
-const address = ref('')
-const category = ref('')
-const location = ref('')
-const logo = ref('')
-const cover = ref('')
 const submitting = ref(false)
 
 const schema = yup.object({
@@ -176,34 +175,18 @@ const schema = yup.object({
   address: yup.string().required(),
   category: yup.string().required(),
   location: yup.string().required(),
-  logo: yup.mixed().test('isImage', 'Invalid file format', (value) => {
-    if (!value) return true; // If no file is provided, it's considered valid
-    return value && value.type.startsWith('image/');
-  }),
-  cover: yup.mixed().test('isImage', 'Invalid file format', (value) => {
-    if (!value) return true; // If no file is provided, it's considered valid
-    return value && value.type.startsWith('image/');
-  }),
+  logo: yup.mixed().test('isImage', 'Invalid file format', (value) => validateFile(value)),
+  cover: yup.mixed().test('isImage', 'Invalid file format', (value) => validateFile(value)),
 })
-
-
-
+const validateFile = (value) => {
+  if (!value) return true; // If no file is provided, it's considered valid
+  return value && value.type.startsWith('image/');
+}
 
 const onSubmit = async (values) => {
   submitting.value = true
   try {
-    await companiesStore.createCompany(
-      values.name,
-      values.description,
-      values.phone,
-      values.website,
-      values.email,
-      values.address,
-      values.category,
-      values.location,
-      values.logo,
-      values.cover,
-    )
+    await companiesStore.createCompany( values)
     router.push('/companies')
   } catch (error) {
     console.log(error)

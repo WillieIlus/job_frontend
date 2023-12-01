@@ -80,23 +80,10 @@ export const useCompanyStore = defineStore('company', {
       });
     },
 
-    async createCompany(name, description, phone, website, email, address, category, location, logo, cover) {
+    async createCompany(values) {
       try {
         const accountStore = useAccountStore();
         const token = accountStore.token;
-
-        const requestData = {
-          name: name,
-          description: description,
-          phone: phone,
-          website: website,
-          email: email,
-          address: address,
-          category: category,
-          location: location,
-          logo: logo,
-          cover: cover,
-        };
 
         const response = await fetch(`${BASE_URL}/companies/`, {
           method: 'POST',
@@ -104,7 +91,7 @@ export const useCompanyStore = defineStore('company', {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
           },
-          body: JSON.stringify(requestData),
+          body: JSON.stringify(values),
         });
 
         if (response.status === 400) {

@@ -1,5 +1,5 @@
 <template>
-  <ButtonsBase  class="bg-indigo-500 hover:bg-indigo-700">
+  <ButtonsBase  class="mx-7 my-7">
       <slot>Blue</slot>
   </ButtonsBase>
 </template>
