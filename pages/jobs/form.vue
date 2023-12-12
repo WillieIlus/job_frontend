@@ -28,10 +28,9 @@
                     <FormsTextarea v-model="requirements" label="Requirements" name="requirements" id="requirements" />
                     <div class="flex flex-wrap justify-between -mx-2">
                       <div class="w-full sm:w-1/2 px-2">
-                        <!-- < -->
                         <label class="text-gray-700 dark:text-gray-300" for="image">Image</label>
-                        <input @change="onImageChange" type="file" id="image" name="image"
-                          class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline">
+                        <input ref="imageInput" type="file" id="image" name="image"
+                          class="w-full py-2 px-3 border rounded focus:outline-none focus:shadow-outline" />
                       </div>
                       <div class="w-full sm:w-1/2 px-2">
                         <label class="text-gray-700 dark:text-gray-300" for="category">Company</label>
@@ -167,14 +166,15 @@
                         <ErrorMessage name="deadline" class="text-red-500" />
                       </div>
                     </div>
+
                     <div class="flex justify-center">
                       <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
                         <span v-if="submitting">Cancel</span>
                         <span v-else>Cancel</span>
                       </ButtonsRed>
-                      <ButtonsGreen :disabled="submitting" type="submit">
-                        <span v-if="submitting">Creating Job…</span>
-                        <span v-else>Create Job</span>
+                      <ButtonsGreen class="ml-5" :disabled="submitting" type="submit">
+                        <span v-if="submitting">Adding Job Vacancy...</span>
+                        <span v-else>Add Job Vacancy</span>
                       </ButtonsGreen>
                     </div>
                   </Form>
@@ -241,15 +241,11 @@ const getUser = async () => {
   await accountStore.getUser()
 }
 
-const onImageChange = (event) => {
-  image.value = event.target.files[0]
-}
-
 const title = ref('')
 const email = ref('')
 const description = ref('')
 const requirements = ref('')
-const image = ref('')
+const imageInput = ref(null)
 const company = ref('')
 const website = ref('')
 const phone = ref('')
@@ -281,13 +277,13 @@ const schema = yup.object({
   job_type: yup.string(),
   salary_type: yup.string(),
   currency: yup.string(),
-  salary: yup.number(),
-  openings: yup.number(),
-  work_experience: yup.number(),
-  education_level: yup.number(),
-  work_hours: yup.number(),
-  vacancies: yup.number(),
-  deadline: yup.date(),
+  // salary: yup.number(),
+  // openings: yup.number(),
+  // work_experience: yup.number(),
+  // education_level: yup.number(),
+  // work_hours: yup.number(),
+  // vacancies: yup.number(),
+  // deadline: yup.date(),
 })
 
 const jobTypes = computed(() => {
@@ -303,15 +299,18 @@ const jobTypes = computed(() => {
 
 const currencyTypes = computed(() => {
   return [
+    { value: 'KSH', label: 'Kenya Shilling' },
     { value: 'USD', label: 'US Dollar' },
+    { value: 'UGH', label: 'Uganda Shilling' },
+    { value: 'TSH', label: 'Tanzania Shilling' },
     { value: 'EUR', label: 'Euro' },
     { value: 'GBP', label: 'British Pound' },
-    { value: 'CAD', label: 'Canadian Dollar' },
-    { value: 'AUD', label: 'Australian Dollar' },
-    { value: 'NZD', label: 'New Zealand Dollar' },
-    { value: 'CHF', label: 'Swiss Franc' },
-    { value: 'JPY', label: 'Japanese Yen' },
-    { value: 'CNY', label: 'Chinese Yuan' },
+    // { value: 'CAD', label: 'Canadian Dollar' },
+    // { value: 'AUD', label: 'Australian Dollar' },
+    // { value: 'NZD', label: 'New Zealand Dollar' },
+    // { value: 'CHF', label: 'Swiss Franc' },
+    // { value: 'JPY', label: 'Japanese Yen' },
+    // { value: 'CNY', label: 'Chinese Yuan' },
   ];
 });
 
@@ -325,38 +324,49 @@ const salaryTypes = computed(() => {
   ];
 });
 
-const onSubmit = async (values) => {
-  submitting.value = true
+const workHourTypes = computed(() => {
+  return [
+    { value: 'PD', label: 'Per Day' },
+    { value: 'PW', label: 'Per Week' },
+    { value: 'PM', label: 'Per Month' },
+    { value: 'PY', label: 'Per Year' },
+  ];
+});
+
+const onSubmit = async () => {
+  const data = new FormData();
+  data.append('title', title.value)
+  data.append('email', email.value)
+  data.append('description', description.value)
+  data.append('requirements', requirements.value)
+  data.append('company', company.value)
+  data.append('website', website.value)
+  data.append('phone', phone.value)
+  data.append('category', category.value)
+  data.append('location', location.value)
+  data.append('job_type', job_type.value)
+  data.append('salary_type', salary_type.value)
+  data.append('currency', currency.value)
+  data.append('salary', salary.value)
+  data.append('education_level', education_level.value)
+  if (imageInput.value && imageInput.value.files.length > 0) {
+    data.append('image', imageInput.value.files[0])
+  }
+  console.log(data)
+
   try {
-    await jobsStore.createJob(
-      title.value,
-      email.value,
-      description.value,
-      requirements.value,
-      // image.value,
-      company.value,
-      website.value,
-      phone.value,
-      category.value,
-      location.value,
-      job_type.value,
-      salary_type.value,
-      currency.value,
-      salary.value,
-      // openings.value,
-      // work_experience.value,
-      education_level.value,
-      // work_hours.value,
-      // vacancies.value,
-      // deadline.value,
-    )
-    router.push('/jobs')
+    const response = await jobsStore.createJob(data);
+    if (!response) {
+      throw new Error('Server responded with ' + response);
+
+    }
+    const responseData = await response.json();
+    console.log(responseData);
   } catch (error) {
-    console.log(error)
-    submitting.value = false
-    alert('Error creating job')
+    console.error('Error submitting form: ', error);
   }
 }
+
 
 const breadcrumbs = [
   {
@@ -368,12 +378,12 @@ const breadcrumbs = [
     to: '/jobs',
   },
   {
-    label: 'Create Job',
+    label: 'Add Job Vacancy',
     to: '/jobs/create',
   }
 ]
 
-const pageTitle = 'Create Job'
+const pageTitle = 'Add Job Vacancy'
 
 
 onMounted(() => {

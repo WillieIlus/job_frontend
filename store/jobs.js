@@ -72,65 +72,44 @@ export const useJobStore = defineStore('job', {
     },
 
 
-    async createJob(
-      title,
-      email, description, requirements,
-      // image, 
-      company, website, phone, category, location, job_type, salary_type, currency, salary,
-      // openings, 
-      // work_experience, 
-      education_level,
-      // work_hours, 
-      // vacancies, 
-      // deadline
-    ) {
+    async createJob(data) {
       try {
         const accountStore = useAccountStore();
         const token = accountStore.token;
-
-        const requestData = {
-          title: title,
-          email: email,
-          description: description,
-          requirements: requirements,
-          // image: image,
-          company: company,
-          website: website,
-          phone: phone,
-          category: category,
-          location: location,
-          job_type: job_type,
-          salary_type: salary_type,
-          currency: currency,
-          salary: salary,
-          // openings: openings,
-          // work_experience: work_experience,
-          education_level: education_level,
-          // work_hours: work_hours,
-          // vacancies: vacancies,
-          // deadline: deadline,
+        const headers = {
+          'Authorization': 'Bearer ' + token
         };
-
-        const response = await fetch(`${BASE_URL}/jobs/?`, {
+        const response = await fetch(`${BASE_URL}/jobs/`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-          },
-          body: JSON.stringify(requestData),
-        });
-
-        if (response.status === 400) {
-          const errorData = await response.json();
-          throw new Error(`Bad Request Error: ${JSON.stringify(errorData)}`);
+          // headers: {
+          //   // 'Content-Type': 'application/json',
+          //   // 'Content-Type': 'multipart/form-data',
+          //   'Authorization': 'Bearer ' + token,
+          // },
+          headers: headers,
+          body:data,
+        });if (!response.ok) {
+          throw new Error('Server responded with ' + response.status);
         }
-
-        const data = await response.json();
-        this.jobs.push(data);
+        const responseData = await response.json();
+        console.log(responseData);
       } catch (error) {
-        console.error(error);
+        console.error('Error submitting form:', error);
+        this.error = error;
       }
     },
+
+    //     if (response.status === 400) {
+    //       const errorData = await response.json();
+    //       throw new Error(`Bad Request Error: ${JSON.stringify(errorData)}`);
+    //     }
+
+    //     const data = await response.json();
+    //     this.jobs.push(data);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // },
 
     async updateJob(slug, job) {
       this.loading = true;

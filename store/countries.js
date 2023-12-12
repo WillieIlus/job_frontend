@@ -1,5 +1,8 @@
-// store/countries.js
 import { defineStore } from 'pinia';
+import { BASE_URL } from './base'
+import { useAccountStore } from './accounts'
+
+
 
 export const useCountriesStore = defineStore('countries', {
   state: () => ({
@@ -7,7 +10,7 @@ export const useCountriesStore = defineStore('countries', {
     country: null,
     loading: false,
     error: null,
-  
+
   }),
   getters: {
     getCountries: (state) => state.countries,
@@ -17,8 +20,14 @@ export const useCountriesStore = defineStore('countries', {
   actions: {
     async createCountry(data) {
       try {
-        const response = await fetch('http://127.0.0.1:8000/locations/countries/', {
+        const accountStore = useAccountStore();
+        const token = accountStore.token;
+        const headers = {
+          'Authorization': 'Bearer ' + token
+        };
+        const response = await fetch(`${BASE_URL}/locations/countries/`, {
           method: 'POST',
+          headers: headers,
           body: data,
         });
         if (!response.ok) {
@@ -30,5 +39,5 @@ export const useCountriesStore = defineStore('countries', {
         console.error('Error submitting form:', error);
       }
     },
-  }  
+  }
 });

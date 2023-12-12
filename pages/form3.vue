@@ -6,30 +6,25 @@
         <div class="container mx-auto">
           <div class="bg-white rounded-lg p-6 shadow-md">
             <h1 class="text-2xl font-semibold mb-4">Country Form</h1>
-            <form @submit.prevent="onSubmit" class="space-y-4">
-              <div class="flex flex-wrap justify-between mx-2">
-                <div class="w-full md:w-1/2 px-2">
-                  <FormsInput v-model="formData.name" label="Name" placeholder="Country Name" />
-                </div>
-                <div class="w-full md:w-1/2 px-2">
-                  <FormsInput v-model="formData.code" label="Code" placeholder="Country Code" />
-                </div>
-                <div class="w-full md:w-1/2 px-2">
+            <Form @submit="onSubmit" :validation-schema="schema" class="space-y-4">
+              <div class="flex flex-wrap justify-between mx-2">                
+                <FormsInput v-model="name" type="text" label="Country Name" name="name" id="name"/>
+                <FormsInput v-model="code" type="text" label="Country Code" name="code" id="code"/>
+                <div>
                   <label class="block text-sm font-medium text-gray-700">Flag</label>
                   <input type="file" ref="flagInput" placeholder="Country Flag" />
                 </div>
               </div>
               <div class="flex justify-center">
-                <ButtonsRed class="mx-7 hover:bg-rose-900" type="cancel" :disabled="submitting">
-                  <span v-if="submitting">Cancel</span>
-                  <span v-else>Cancel</span>
+                <ButtonsRed class="mx-7 pr-3 " type="button">
+                  Cancel
                 </ButtonsRed>
-                <ButtonsGreen :disabled="submitting" type="submit">
+                <ButtonsGreen class="pl-3" :disabled="submitting" type="submit">
                   <span v-if="submitting">Creating Country…</span>
                   <span v-else>Create Country</span>
                 </ButtonsGreen>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </section>
@@ -39,39 +34,37 @@
 
   
 <script setup>
-import { ref } from 'vue'
-import { Form, Field, ErrorMessage } from 'vee-validate'
+import { ref } from 'vue';
+import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import { useCountriesStore } from '~/store/countries';
 
 const countriesStore = useCountriesStore();
 
-const formData = ref({
-  name: '',
-  code: '',
-  flag: null,
-});
+const name = ref('');
+const code = ref('');
+const flagInput = ref(null);
 
 const schema = yup.object({
   name: yup.string().required(),
-  code: yup.string().required(),
-  flag: yup.string().required(),
+  code: yup.string(),
+  flag: yup.mixed()
 });
-
-const flagInput = ref(null);
 
 const onSubmit = async () => {
   const data = new FormData();
-  data.append('name', formData.value.name);
-  data.append('code', formData.value.code);
-  if (flagInput.value.files[0]) {
+  data.append('name', name.value);
+  data.append('code', code.value);
+
+  if (flagInput.value && flagInput.value.files.length > 0) {
     data.append('flag', flagInput.value.files[0]);
   }
+  console.log(data)
 
   try {
     const response = await countriesStore.createCountry(data);
-    if (!response.ok) {
-      throw new Error('Server responded with ' + response.status);
+    if (!response) {
+      throw new Error('Server responded with ' + response);
     }
     const responseData = await response.json();
     console.log(responseData);
@@ -80,23 +73,12 @@ const onSubmit = async () => {
   }
 };
 
-
 const breadcrumbs = [
-  {
-    label: 'Home',
-    to: '/',
-  },
-  {
-    label: 'Countries',
-    to: '/locations/countries',
-  },
-  {
-    label: 'Create Country',
-    to: '/Country/create',
-  }
-]
+  { label: 'Home', to: '/' },
+  { label: 'Countries', to: '/locations/countries' },
+  { label: 'Create Country', to: '/Country/create' }
+];
 
-const pageTitle = 'Create Country'
+const pageTitle = 'Create Country';
 
 </script>
-
