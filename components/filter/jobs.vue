@@ -55,12 +55,6 @@
       </div>
       <!--end row-->
     </div>
-    <div class="absolute top-4 ltr:right-4 rtl:left-4">
-      <div
-        class="w-8 h-8 text-center text-gray-100 transition-all duration-300 bg-transparent border rounded border-gray-100/50 hover:bg-red-600 hover:border-transparent hover:text-white">
-        <a href="javascript:void(0)"><i class="uil uil-heart-alt text-lg leading-[1.8]"></i></a>
-      </div>
-    </div>
   </div>
 </template>
 

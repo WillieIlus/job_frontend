@@ -6,7 +6,6 @@
       <div v-else>
 
         <NavigationBreadcrumbs :items="breadcrumbs" :pageTitle="pageTitle" />
-
         <!-- Start team -->
         <section class="py-16">
           <div class="container mx-auto">
@@ -60,10 +59,10 @@
                 </div>
 
                 <div class="space-y-8 mt-14">
-                  <!-- <FilterJobs :jobs="jobStore.jobs" /> -->
-                  <div v-for="job in jobs" :key="job.id">
+                  <FilterJobs :jobs="jobs" />
+                  <!-- <div v-for="job in jobs" :key="job.id">
                     {{ job.title }}
-                  </div>
+                  </div> -->
                 </div>
 
                 <FilterPagination />
@@ -79,7 +78,6 @@
     </div>
   </div>
 </template>
-
 
 <script setup>
 import { onMounted } from 'vue'
@@ -117,8 +115,6 @@ const selectedCategory = ref('')
 const selectedLocation = ref('')
 const submitting = ref(false)
 
-
-
 const performSearch = async () => {
   submitting.value = true
   try {
@@ -132,25 +128,6 @@ const performSearch = async () => {
   } finally {
     submitting.value = false
   }
-}
-
-
-const fetchCategories = async () => {
-  await categoryStore.fetchCategories()
-}
-
-const fetchLocations = async () => {
-  await locationStore.fetchLocations()
-}
-
-const selectCategory = (category) => {
-  selectedCategory.value = category.name
-  jobStore.filterByCategory(category.id)
-}
-
-const selectLocation = (location) => {
-  selectedLocation.value = location.name
-  jobStore.filterByLocation(location.id)
 }
 
 const jobCount = computed(() => jobs.value.length)
@@ -180,18 +157,15 @@ const debounce = (func, delay) => {
   }
 }
 
-const debouncedSearch = debounce(performSearch, 3000) // Adjust the delay as needed
+const debouncedSearch = debounce(performSearch, 3000)
 
-// watchEffect((onInvalidate) => {
-//   performSearch()
-// })
 
 watch(searchTitle, debouncedSearch)
 
 onMounted(async () => {
-  // await fetchJobs()
-  await fetchCategories()
-  await fetchLocations()
+  await jobStore.fetchJobs()
+  await categoryStore.fetchCategories()
+  await locationStore.fetchLocations()
 })
 
 

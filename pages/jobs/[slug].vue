@@ -226,23 +226,19 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useJobStore } from '~/store/jobs'
 import { useRouter, useRoute } from 'vue-router'
 
+import { useJobStore } from '~/store/jobs'
+import { useCategoryStore } from '~/store/categories'
+import { useLocationStore } from '~/store/locations'
+
 const jobStore = useJobStore()
+const categoryStore = useCategoryStore()
+const locationStore = useLocationStore()
 
 const { job, jobs, loading, error } = storeToRefs(jobStore)
 const route = useRoute()
 const router = useRouter()
-
-const fetchJob = async () => {
-  const { params } = route()
-  await jobStore.fetchJob(params.slug)
-}
-
-const fetchJobs = async () => {
-  await jobStore.fetchJobs()
-}
 
 const breadcrumbs = [
   {
@@ -254,20 +250,19 @@ const breadcrumbs = [
     to: '/jobs',
   },
   {
-    label: route.params.slug || 'Jobs',
+    label: route.params.slug || job.title || 'Jobs',
     to: route.fullPath,
   }
 ]
 
 const pageTitle = route.params.slug || 'Jobs'
 
+
 onMounted(async () => {
-  await fetchJob()
-  await fetchJobs()
-  await fetchCategories()
-  await fetchLocations()
+  await jobStore.fetchJob(route.params.slug)
+  await jobStore.fetchJobs()
+  await categoryStore.fetchCategories()
+  await locationStore.fetchLocations()
 })
-
-
 
 </script>
